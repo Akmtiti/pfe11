@@ -1,0 +1,32 @@
+POST http://localhost:8001/custom/createCustom HTTP/1.1
+content-type: application/json
+
+{
+
+"scheme": "branch",
+"name": "Branch 1"
+}
+
+###
+POST http://localhost:8001/custom/getCustom HTTP/1.1
+content-type: application/json
+
+{
+
+"scheme": "branch",
+"filters": "",
+"fields": ""
+}
+
+###
+POST http://localhost:8001/custom HTTP/1.1
+content-type: application/json
+
+{
+
+"scheme": "branch",
+"method": "get"
+# "filters": {"_id" : "628d4eb22dec9ba283851051"},
+# "fields": ""
+}
+

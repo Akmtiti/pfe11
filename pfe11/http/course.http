@@ -1,0 +1,11 @@
+POST http://localhost:8001/course/createCourse HTTP/1.1
+content-type: application/json
+
+{
+"courseName": "Math 1",
+"className": "LISI 4",
+"imagePath": "image4.png",
+"teacherId": "627c06c8c9c8f5fe02d3a0da"
+}
+
+###

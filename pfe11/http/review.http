@@ -1,0 +1,11 @@
+POST http://localhost:8001/review/createReview HTTP/1.1
+content-type: application/json
+
+{
+"studentId": "627c02e529694f72ac5d2a9f",
+"courseId": "627caf92946021847420b826",
+"reviewMessage": "Review 2",
+"rating": 4
+}
+
+###
