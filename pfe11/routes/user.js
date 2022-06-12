@@ -21,6 +21,9 @@ router.get("/user/getFields", getFields)
 router.get("/user/getUsers", async (req, res) =>
   res.send(await userModel.find())
 )
+router.get("/user/getTeachers", async (req, res) =>
+  res.send(await userModel.find({privilege : "Teacher"}, "-password"))
+)
 
 router.post("/user/singup", signUp)
 router.post("/user/login", login)

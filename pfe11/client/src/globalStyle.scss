@@ -1,0 +1,139 @@
+html {
+  font-size: 16px !important;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+.active-pink-2 input[type="text"]:focus:not([readonly]) {
+  border-bottom: 1px solid #40ee6c;
+  box-shadow: 0 1px 0 0 #5edd45;
+}
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset,
+label {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: 1.5em;
+  margin: 10px;
+}
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: rgb(238, 255, 0);
+}
+.off {
+  color: #ccc;
+}
+
+.adminPage{
+  padding: 1rem;
+}
+
+.adminPage table * {
+  text-align: center;
+}
+
+.teachersPage, .uploadCoursePage{
+  min-height: calc(100vh - 79px) ;
+  padding: 1rem;
+  margin-bottom: 3rem;
+}
+
+
+.uploadCoursePage{
+  padding: 3rem;
+  // position: relative;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // gap: 3%;
+  /* display: grid;
+  place-items: center; */
+}
+
+.upload-file-button-container >div{
+  display: flex;
+  gap: 1rem;
+
+}
+
+.upload-file-button-container button{
+
+  height: 56px;
+  min-width: 120px;
+}
+
+.uploadCoursePage .submit-button{
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+
+
+}

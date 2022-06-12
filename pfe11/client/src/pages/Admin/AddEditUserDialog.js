@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText"
 import DialogTitle from "@mui/material/DialogTitle"
 import { useState } from "react"
 import { Grid, IconButton, TextField } from "@mui/material"
-import { Axios } from "./../../axios"
+import { API } from "./../../axios"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import {
@@ -17,7 +17,7 @@ import {
   SET_USER_FEEDBACK,
   UPDATE_FETCHED_DATA,
   UPDATE_FETCHED_USERS_DATA,
-} from "./../../store/actions"
+} from "../../store/constants"
 import { useEffect } from "react"
 
 function AddEditUserDialog({
@@ -57,8 +57,7 @@ function AddEditUserDialog({
   // Handles
   const handleAddEditUser = async () => {
     try {
-      let createdUser = (await Axios.put(`/user/addEditUser`, userFormData))
-        .data
+      let createdUser = (await API.put(`/user/addEditUser`, userFormData)).data
       // Edit
       if (userData) {
         dispatch({

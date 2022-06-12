@@ -1,21 +1,18 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 html {
   font-size: 16px !important;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-
 
 .App {
   text-align: center;
@@ -28,17 +25,27 @@ code {
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    -webkit-animation: App-logo-spin infinite 20s linear;
+            animation: App-logo-spin infinite 20s linear;
   }
 }
 
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -47,52 +54,72 @@ code {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+@-webkit-keyframes App-logo-spin {
   from {
-    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
+
+@keyframes App-logo-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 .visually-hidden {
   clip: rect(0 0 0 0);
-  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
   height: 1px;
   overflow: hidden;
   position: absolute;
   white-space: nowrap;
   width: 1px;
 }
+
 .active-pink-2 input[type="text"]:focus:not([readonly]) {
   border-bottom: 1px solid #40ee6c;
-  box-shadow: 0 1px 0 0 #5edd45;
+  -webkit-box-shadow: 0 1px 0 0 #5edd45;
+          box-shadow: 0 1px 0 0 #5edd45;
 }
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 fieldset,
 label {
   margin: 0;
   padding: 0;
 }
+
 h1 {
   font-size: 1.5em;
   margin: 10px;
 }
+
 button {
   background-color: transparent;
   border: none;
   outline: none;
   cursor: pointer;
 }
+
 .on {
-  color: rgb(238, 255, 0);
+  color: #eeff00;
 }
+
 .off {
   color: #ccc;
 }
 
-.adminPage{
+.adminPage {
   padding: 1rem;
 }
 
@@ -100,39 +127,33 @@ button {
   text-align: center;
 }
 
-.teachersPage, .uploadCoursePage{
-  min-height: calc(100vh - 79px) ;
+.teachersPage, .uploadCoursePage {
+  min-height: calc(100vh - 79px);
   padding: 1rem;
   margin-bottom: 3rem;
 }
 
-
-.uploadCoursePage{
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3%;
+.uploadCoursePage {
+  padding: 3rem;
   /* display: grid;
   place-items: center; */
 }
 
-.upload-file-button-container >div{
+.upload-file-button-container > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 1rem;
-
 }
 
-.upload-file-button-container button{
-
+.upload-file-button-container button {
   height: 56px;
   min-width: 120px;
 }
 
-.uploadCoursePage .submit-button{
+.uploadCoursePage .submit-button {
   position: absolute;
   top: 3rem;
   right: 3rem;
-
-
 }
+/*# sourceMappingURL=globalStyle.css.map */

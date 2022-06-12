@@ -2,7 +2,7 @@ import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
 import TeacherCard from "./TeacherCard"
-import { Axios } from "./../../axios"
+import { API } from "./../../axios"
 import { Box, CircularProgress, Grid } from "@mui/material"
 import Header from "./../../components/Header"
 import Footer from "./../../components/Footer"
@@ -12,7 +12,7 @@ function TeachersPage() {
   useEffect(async () => {
     setFetchedTeachers(
       (
-        await Axios.get("/user/getFields", {
+        await API.get("/user/getFields", {
           params: { filter: { privilege: "Teacher" } },
         })
       ).data
@@ -23,7 +23,7 @@ function TeachersPage() {
       <Header />
       <div className="teachersPage">
         <h1>Teachers</h1>
-      {fetchedTeachers.length ? (
+        {fetchedTeachers.length ? (
           <Grid container rowSpacing={4} spacing={2}>
             {fetchedTeachers.map((teacher, key) => (
               <Grid key={key} item xs={3}>
@@ -31,12 +31,12 @@ function TeachersPage() {
               </Grid>
             ))}
           </Grid>
-      ) : (
-        <Box sx={{ display: 'flex' , justifyContent :'center'}}>
-        <CircularProgress />
-      </Box>
+        ) : (
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <CircularProgress />
+          </Box>
         )}
-        </div>
+      </div>
       <Footer />
     </>
   )

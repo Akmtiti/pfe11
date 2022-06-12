@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button"
 
 import React, { useEffect, useState } from "react"
-import { Axios } from "../../../axios"
+import { API } from "../../../axios"
 // assets/images/mecan.jpg
 // assets/images/inconnue.jpg
 // assets/images/deeplr.jpg
@@ -35,7 +35,7 @@ function Courses() {
   const [fetchedCourses, setFetchedCourses] = useState([])
 
   useEffect(async () => {
-    setFetchedCourses((await Axios.get("/course/getCourses")).data)
+    setFetchedCourses((await API.get("/course/getCourses")).data)
   }, [])
   return (
     <section id="courses">
@@ -47,7 +47,7 @@ function Courses() {
                 Popular Courses{" "}
                 <small>Upgrade your skills with newest courses</small>
               </h2>
-              <Button variant="link">Voir plus</Button>
+              <Button href="/courses" variant="link">Voir plus</Button>
             </div>
             <div className="owl-carousel owl-theme owl-courses">
               {renderCourses()}
@@ -58,10 +58,9 @@ function Courses() {
     </section>
   )
 
-
   function renderCourses() {
     return fetchedCourses.map((course, key) => (
-      <div key={key}  className="col-md-4 col-sm-4">
+      <div key={key} className="col-md-4 col-sm-4">
         <div className="item">
           <div className="courses-thumb">
             <div className="courses-top">
@@ -70,7 +69,8 @@ function Courses() {
                   src={baseUrl + course.imagePath}
                   width="200"
                   height="210"
-                  alt="" />
+                  alt=""
+                />
               </div>
             </div>
             <div className="courses-detail">
@@ -84,7 +84,8 @@ function Courses() {
                 <img
                   src="assets/images/inconnue.jpg"
                   className="img-responsive"
-                  alt="" />
+                  alt=""
+                />
                 <span>{course.teacherId.username} </span>
               </div>
             </div>

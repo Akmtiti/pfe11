@@ -21,7 +21,7 @@ function Header() {
             <span className="icon icon-bar"></span>
           </button>
 
-          <a href="#" className="navbar-brand">
+          <a href="/" className="navbar-brand">
             {" "}
             <img
               src="http://www.issatso.rnu.tn/fo/images/logo.png"
@@ -32,7 +32,10 @@ function Header() {
         </div>
 
         <div className="collapse navbar-collapse">
-          <ul className="nav navbar-nav navbar-nav-first">
+          <ul
+            style={{ width: "100%" }}
+            className="nav navbar-nav navbar-nav-first"
+          >
             <li>
               <a href="#top" className="smoothScroll">
                 Home
@@ -63,37 +66,41 @@ function Header() {
                 <i className="smoothScroll"></i> Login
               </a>
             </li>
+            {/* {currentUser?.privilege === "admin" && ( */}
+              <li>
+                <a href="/admin">
+                  <i className="smoothScroll"></i> Admin page
+                </a>
+              </li>
+            {/* )} */}
+            <li>
+              <a href="/teachers">
+                <i className="smoothScroll"></i> Teachers Page
+              </a>
+            </li>
+            <li>
+              <a href="/courses">
+                <i className="smoothScroll"></i> Courses Page
+              </a>
+            </li>
+            {/* {currentUser?.privilege === "Teacher" && ( */}
+              <li>
+                <a href="/uploadCourse">
+                  <i className="smoothScroll"></i> Uplaod Page
+                </a>
+              </li>
+            {/* )} */}
           </ul>
 
-          <div className="search bar">
+          {/* <div className="search bar">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Search />
-          </div>
+          </div> */}
           {currentUser && (
             <div style={{ whiteSpace: "nowrap" }}>
               Utilisateur connecté : {currentUser}{" "}
             </div>
           )}
-
-          {/* <Link to = "/admin">Test : Admin page
-            </Link> */}
-         <Stack direction="row">
-            <a href="/">
-               home page
-            </a>
-            <a href="/admin">
-               Admin page
-            </a>
-            <a href="/teachers">
-              teachers page
-            </a>
-            <a href="/courses">
-              courses page
-            </a>
-            <a href="/uploadCourse">
-              upload page
-            </a>
-         </Stack>
         </div>
       </div>
     </section>

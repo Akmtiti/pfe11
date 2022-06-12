@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Button from "react-bootstrap/Button"
-import { Axios } from "../../../axios"
+import { API } from "../../../axios"
 
 const fetchedTeachers = [
   "Teacheer1 ",
@@ -12,9 +12,8 @@ const fetchedTeachers = [
 function Teachers() {
   const [fetchedTeachers, setFetchedTeachers] = useState([])
   useEffect(async () => {
-    setFetchedTeachers((await Axios.get("/user/getTeachers")).data)
+    setFetchedTeachers((await API.get("/user/getTeachers")).data)
   }, [])
-
 
   return (
     <section id="team">
@@ -26,7 +25,7 @@ function Teachers() {
                 Teachers <small>Meet Professional Trainers</small>
               </h2>
 
-              <Button variant="link">Voir plus</Button>
+              <Button href="/teachers" variant="link">Voir plus</Button>
             </div>
 
             <div className="owl-carousel owl-theme owl-courses">

@@ -12,6 +12,7 @@ import teacherRouter from "./routes/teacher.js"
 import reviewRouter from "./routes/review.js"
 import contactUsRouter from "./routes/contactUs.js"
 import customRouter from "./routes/custom.js"
+import { branchRoutes } from "./routes/branch.js"
 
 // Restore password
 recoverPassword(app)
@@ -29,3 +30,4 @@ app.use(teacherRouter)
 app.use(reviewRouter)
 app.use(contactUsRouter)
 app.use(customRouter)
+app.use("/branches", branchRoutes)

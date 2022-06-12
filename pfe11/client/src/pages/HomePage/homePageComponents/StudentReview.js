@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Axios } from "../../../axios"
+import { API } from "../../../axios"
 
 const fetchedReviews = [
   { username: "Stud1", rating: 5, message: "Message" },
@@ -17,7 +17,7 @@ function StudentReview() {
   const [fetchedReviews, setFetchedReviews] = useState([])
 
   useEffect(async () => {
-    setFetchedReviews((await Axios.get("/review/getReviews")).data)
+    setFetchedReviews((await API.get("/review/getReviews")).data)
   }, [])
 
   return (

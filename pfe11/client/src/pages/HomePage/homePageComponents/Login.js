@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { Axios } from "../../../axios"
+import { API } from "../../../axios"
 import Button from "react-bootstrap/Button"
 
-function Login({setConnectedUser}) {
+function Login({ setConnectedUser }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [feedback, setFeedback] = useState("")
@@ -11,14 +11,14 @@ function Login({setConnectedUser}) {
     console.log(email)
     console.log(password)
 
-    Axios.post("/user/login", {
+    API.post("/user/login", {
       email: email,
       password: password,
     })
       .then((res) => {
         console.log(res)
-          setFeedback("Connecté.")
-          setConnectedUser(res.data)
+        setFeedback("Connecté.")
+        setConnectedUser(res.data)
       })
       .catch((err) => {
         console.log(err)

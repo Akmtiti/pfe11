@@ -1,7 +1,7 @@
 import express from "express"
 import courseModel from "../models/courseModel.js"
 import { createCourse } from "../controllers/course.js"
-import branchModel from "../models/branchModel.js"
+import branchModel from "../models/branch.js"
 import userModel from "../models/userModel.js"
 const router = express.Router()
 
@@ -67,7 +67,7 @@ const custom = async (req, res) => {
     var returnedDocument
     switch (req.body.method) {
       case "get":
-        returnedDocument = await selectedScheme.find(filters, {...fields, password : 0})
+        returnedDocument = await selectedScheme.find(filters, {...fields, password : 0, passwordRecovery :0, refreshToken :0, token : 0})
         break
       case "post":
         returnedDocument = await selectedScheme.create(req.body)

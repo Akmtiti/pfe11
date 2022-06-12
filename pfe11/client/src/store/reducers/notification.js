@@ -1,4 +1,4 @@
-import * as actionType from "../actions"
+import * as actionType from "../constants"
 const notification = (
   state = {
     deviceNotification: 0,

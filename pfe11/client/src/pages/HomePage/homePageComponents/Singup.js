@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Button from "react-bootstrap/Button"
-import { Axios } from "../../../axios"
+import { API } from "../../../axios"
 
 function Signup() {
   const [name, setName] = useState("")
@@ -13,7 +13,7 @@ function Signup() {
     if (password !== confirmPassword)
       return setFeedback("Mot de passe non identique.")
 
-    Axios.post("/user/singup", {
+    API.post("/user/singup", {
       username: name,
       email: email,
       password: password,

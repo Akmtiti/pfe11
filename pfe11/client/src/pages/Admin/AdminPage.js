@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   IconButton,
   Stack,
@@ -14,23 +15,33 @@ import React from "react"
 import { useState } from "react"
 import AddEditUserDialog from "./AddEditUserDialog"
 import { useEffect } from "react"
-import { Axios } from "./../../axios"
+import { API } from "./../../axios"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
 import ShowConfirmationDialog from "./ShowDeleteConfirmationDialog"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { SET_FETCHED_DATA } from "./../../store/actions"
+import {
+  PULL_FETCHED_DATA,
+  PUSH_FETCHED_DATA,
+  SET_FEEDBACK,
+  SET_FETCHED_DATA,
+} from "../../store/constants"
 
-const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+import { DataGrid, useGridApiRef } from "@mui/x-data-grid"
+import BranchDataGrid from "./BranchDataGrid"
+import { findBranches } from "../../store/actions/branch"
+
 function AdminPage() {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
   // if (currentUser?.role !== 'Admin') window.location.href = "/"
+  const [objectFeedback, ObjectFeedback] = useState({
+    text: "",
+    severity: "success",
+  })
   const [selectedSchemeTable, setSelectedSchemeTable] = useState("Teacher") // "Teacher" or "Student"
-  // const [feedback, setFeedback] = useState("")
-  // const { fetchedUsersData, feedback } = useSelector((state) => state.user)
   const { fetchedUsersData, fetchedBranchData, fetchedClassData, feedback } =
     useSelector((state) => state.scheme)
-  console.log(fetchedUsersData)
   const dispatch = useDispatch()
 
   // Fetch and dispatch
@@ -42,6 +53,7 @@ function AdminPage() {
   //   dispatch({ type: "SET_FETCHED_USERS_DATA", payload: fetchedUserData.data })
   // }, [])
 
+  // Scheme selector
   useEffect(async () => {
     let fetchedSchemeData = []
     let schemeSelector = ""
@@ -51,7 +63,7 @@ function AdminPage() {
         schemeSelector = "fetchedUsersData"
 
         if (fetchedUsersData.length === 0)
-          fetchedSchemeData = await Axios.post("/custom", {
+          fetchedSchemeData = await API.post("/custom", {
             filters: {
               privilege: { $in: ["Student", "Teacher"] },
             },
@@ -64,7 +76,7 @@ function AdminPage() {
         schemeSelector = "fetchedBranchData"
 
         if (fetchedBranchData.length === 0)
-          fetchedSchemeData = await Axios.post("/custom", {
+          fetchedSchemeData = await API.post("/custom", {
             scheme: "branch",
             method: "get",
           })
@@ -74,7 +86,7 @@ function AdminPage() {
         schemeSelector = "fetchedClassData"
 
         if (fetchedClassData.length === 0)
-          fetchedSchemeData = await Axios.post("/custom", {
+          fetchedSchemeData = await API.post("/custom", {
             scheme: "class",
             method: "get",
           })
@@ -86,8 +98,6 @@ function AdminPage() {
     }
     if (fetchedSchemeData.length !== 0)
       if (fetchedSchemeData?.data?.length !== 0) {
-        console.log(fetchedSchemeData)
-
         dispatch({
           type: SET_FETCHED_DATA,
           payload: { [schemeSelector]: fetchedSchemeData.data },
@@ -95,9 +105,24 @@ function AdminPage() {
       }
   }, [selectedSchemeTable])
 
+  useEffect(() => {
+    dispatch(findBranches())
+  }, [])
+
   // Handles
   const handleUserSwitch = (selectedScheme) => {
     setSelectedSchemeTable(selectedScheme)
+  }
+
+  const selectTable = () => {
+    switch (selectedSchemeTable) {
+      case "Branch":
+        return <BranchDataGrid />
+
+      case "Teacher":
+      case "Student":
+        return teacherStudentTable()
+    }
   }
 
   return (
@@ -125,6 +150,13 @@ function AdminPage() {
       </Stack>
       <p style={{ margin: "10px 0" }}>{feedback} </p>
       {/* Table */}
+
+      {selectTable()}
+    </div>
+  )
+
+  function teacherStudentTable() {
+    return (
       <TableContainer>
         <Table stickyHeader>
           {/* Table head */}
@@ -184,8 +216,8 @@ function AdminPage() {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
-  )
+    )
+  }
 
   function selectSchemeButton(selection) {
     return (
@@ -229,3 +261,7 @@ function AdminPage() {
 }
 
 export default AdminPage
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}

@@ -17,6 +17,9 @@ app.use(express.json());
 app.use(Cors());
 app.use(express.urlencoded());
 
+app.use("/courseFiles", express.static("courseFiles"))
+
+
 app.listen(port, () => console.log(`Listening on localhost: ${port}`));
 
 app.use("/courseImages", express.static("courseImages"))

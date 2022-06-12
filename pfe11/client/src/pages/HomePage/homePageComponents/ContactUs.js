@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Button from "react-bootstrap/Button"
-import { Axios } from "../../../axios"
+import { API } from "../../../axios"
 import StarRating from "../../../StarRating"
 
 function ContactUs() {
@@ -10,7 +10,7 @@ function ContactUs() {
   const [feedback, setFeedback] = useState("")
 
   const submit = () => {
-    Axios.post("/contactUs/createContactUs", {
+    API.post("/contactUs/createContactUs", {
       name: name,
       email: email,
       message: message,
@@ -72,8 +72,8 @@ function ContactUs() {
                   name="send message"
                   value="Send Message"
                 />
-                          </div>
-                          <p>{feedback} </p>
+              </div>
+              <p>{feedback} </p>
             </form>
           </div>
 
