@@ -1,16 +1,45 @@
-import userModel from "../models/userModel.js"
+import User from "../models/user.js"
 
 export const createTeacher = async (req, res) => {
+  let created = await new User(req.body).save()
 
-  let count = await userModel.countDocuments({ email: req.body.email })
-  if (count > 0) return res.status(500).send("Email déjà existante.")
+  res.send(created)
+}
 
-  req.body.privilege = "teacher"
-  User.create(req.body, (err, data) => {
-    if (err) {
-      res.status(500).send("Erreur Serveur.")
-    } else {
-      res.status(201).send()
-    }
-  })
+export const findOneTeacher = async (req, res) => {
+  const { id } = req.params
+
+  let found = await User.findById(id, req.body)
+
+  res.send(found)
+}
+
+export const findAllTeacher = async (req, res) => {
+
+  let found = await User.find({privilege : "Teacher"}, "-password -token")
+
+
+  res.send(found)
+}
+
+export const updateTeacher = async (req, res) => {
+  const { id } = req.params
+
+  delete req.body._id
+
+  let updated = await User.findOneAndUpdate(
+    {_id : id},
+    { $set: req.body },
+    { returnOriginal: false }
+  )
+
+  res.send(updated)
+}
+
+export const deleteOneTeacher = async (req, res) => {
+  const { id } = req.params
+
+  await User.deleteOne({_id :id})
+
+  res.send("Delete success.")
 }

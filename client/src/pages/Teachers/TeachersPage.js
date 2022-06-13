@@ -2,10 +2,10 @@ import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
 import TeacherCard from "./TeacherCard"
-import { API } from "./../../axios"
+import { API } from "../../api"
 import { Box, CircularProgress, Grid } from "@mui/material"
-import Header from "./../../components/Header"
-import Footer from "./../../components/Footer"
+import Header from "../../globalComponents/Header"
+import Footer from "../../globalComponents/Footer"
 
 function TeachersPage() {
   const [fetchedTeachers, setFetchedTeachers] = useState([])

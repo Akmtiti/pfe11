@@ -1,4 +1,4 @@
-import * as API from "src/axios"
+import * as API from "src/api"
 import * as actionType from '../constants';
 
 
@@ -14,10 +14,10 @@ export const findBranch = (id) => async (dispatch) => {
   }
 }
 
-export const findBranches = (filters, fields) => async (dispatch) => {
+export const findBranches = () => async (dispatch) => {
   try {
     dispatch({ type: actionType.LOADING_BRANCH })
-    const { data } = await API.findBranches(filters, fields)
+    const { data } = await API.findBranches()
     dispatch({ type: actionType.SET_BRANCHES, payload: data })
     dispatch({ type: actionType.END_LOADING_BRANCH })
     return data

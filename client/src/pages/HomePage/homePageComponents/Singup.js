@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Button from "react-bootstrap/Button"
-import { API } from "../../../axios"
+import { API } from "../../../api"
 
 function Signup() {
   const [name, setName] = useState("")

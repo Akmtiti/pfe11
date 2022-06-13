@@ -1,4 +1,4 @@
-import { LinearProgress, Stack } from "@mui/material"
+import { ClickAwayListener, LinearProgress, Stack } from "@mui/material"
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { DataGrid, frFR } from "@mui/x-data-grid"
@@ -9,14 +9,20 @@ function DataGridComponent(props) {
   const { selectedRow } = useSelector((state) => state.dataGrid)
 
   const handleEditRow = async (newRow, oldRow) => {
-    props.onRowEdit(newRow)
+    dispatch(props.onRowEdit(newRow._id, newRow))
     return newRow
+  }
+
+  const handleClickAway = async () => {
+    if (props.enableClickAway === true)
+      dispatch({ type: "SET_SELECTED_ROW", payload: null })
   }
 
   // var rows = DataGridRows(props.filter, props.prestataireId)
 
   return (
-    <div>
+    <ClickAwayListener onClickAway={handleClickAway}>
+
       <DataGrid
         localeText={frFR.components.MuiDataGrid.defaultProps.localeText}
         {...props}
@@ -41,15 +47,15 @@ function DataGridComponent(props) {
 
         // Selection
         onSelectionModelChange={(ids) => {
-          if (props.allowSelectedRow === false) return
+          // if (props.allowSelectedRow === false) return
 
-          if (ids[0] === selectedRow?._id)
-            return dispatch({ type: SET_SELECTED_ROW, payload: null })
+          // if (ids[0] === selectedRow?._id)
+          //   return dispatch({ type: SET_SELECTED_ROW, payload: null })
 
           const selectedRowData = props.rows.filter((row) => row._id === ids[0])
           dispatch({ type: SET_SELECTED_ROW, payload: selectedRowData[0] })
         }}
-        selectionModel={[selectedRow]}
+        // selectionModel={[selectedRow]}
         hideFooterSelectedRowCount={true}
         // checkboxSelection
         // onCellClick={(e) => {
@@ -62,10 +68,16 @@ function DataGridComponent(props) {
         //   } else e.row.isSelected = true
         // }}
 
+        initialState={{
+          sorting: {
+            sortModel: [{ field: 'createdAt', sort: 'desc' }],
+          },
+        }}
+
         // Enable new stuff
         experimentalFeatures={{ newEditingApi: true }}
       />
-    </div>
+    </ClickAwayListener>
   )
 
   function NoResultsOverlay() {

@@ -24,7 +24,7 @@ export const branch = (
     case actionType.ADD_BRANCH:
       return {
         ...state,
-        branches: [...state.branches, payload],
+        branches: [payload, ...state.branches, ],
       }
 
     case actionType.UPDATE_BRANCH:

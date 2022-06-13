@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { API } from "../../../axios"
+import { API } from "../../../api"
 import Button from "react-bootstrap/Button"
 
 function Login({ setConnectedUser }) {
@@ -54,7 +54,7 @@ function Login({ setConnectedUser }) {
           Login
         </button>
         <p>{feedback}</p>
-        <Button variant="link">Forget password</Button>
+        <Button href ="/forgot_password" variant="link">Forget password</Button>
       </div>
     </div>
   )

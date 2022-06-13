@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText"
 import DialogTitle from "@mui/material/DialogTitle"
 import { useState } from "react"
 import { Grid, IconButton, TextField } from "@mui/material"
-import { API } from "./../../axios"
+import { API } from "../../api"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import {

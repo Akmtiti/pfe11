@@ -8,32 +8,28 @@ import {
   Tooltip,
 } from "@mui/material"
 import React from "react"
-import { Fragment } from "react"
 import { useState } from "react"
-import { ReactReduxContext } from "react-redux"
-import Footer from "../../components/Footer"
-import Header from "../../components/Header"
-import { API } from "./../../axios"
-
-const branches = [
-  { name: "branch1", classes: ["class1", "class2", "class3"] },
-  { name: "branch2", classes: ["class1x", "class2x", "class3x"] },
-  { name: "branch3", classes: ["class1z", "class2z", "class3z"] },
-]
+import { useDispatch, useSelector } from "react-redux"
+import Footer from "../../globalComponents/Footer"
+import Header from "../../globalComponents/Header"
+import { API } from "../../api"
+import { createCourse } from "../../store/actions/course"
 
 function UploadCoursePage() {
+  const currentUser = JSON.parse(localStorage.getItem("user"))
+  const dispatch = useDispatch()
+  const { classes } = useSelector((state) => state.class)
+
   const [files, setFiles] = useState({
     course: [],
     TD: [],
     TP: [],
     examen: [],
   })
-  const [fileState, setFileState] = useState({})
   const [formData, setFormData] = useState({
-    branchName: "",
-    class: "",
-    courseName: "",
-    level: "",
+    classId: "",
+    title: "",
+    teacherId: currentUser?._id,
   })
 
   const handleChange = async (e) => {
@@ -41,29 +37,43 @@ function UploadCoursePage() {
   }
 
   const handleSubmit = async () => {
-    // await Axios.post(
-    //   `/course/upload/627caf233da5a1a04ba4f617/${fileName}`,
-    //   formData
-    // )
-    Object.keys(files).forEach(async function (key) {
-      var formDataImage = new FormData()
+    try {
+      let createdCourse = await dispatch(createCourse(formData))
+      console.log(createdCourse)
+      dispatch({
+        type: "SET_FEEDBACK_OBJECT",
+        payload: {
+          feedback: "Course created successfully",
+          severity: "success",
+        },
+      })
 
-      if (files[key].length > 0) {
-        for (const pdf of files[key]) {
-          formDataImage.append("files", pdf)
+      Object.keys(files).forEach(async function (key) {
+        var formDataImage = new FormData()
+
+        if (files[key].length > 0) {
+          for (const pdf of files[key]) {
+            formDataImage.append("files", pdf)
+
+            await API.patch(`/course/addFilePath/${createdCourse._id}`, {
+              path: key + "/" + pdf.name,
+            })
+          }
+
+          await API.post(
+            `/course/upload/${createdCourse._id}/${key}`,
+            formDataImage
+          )
         }
 
-        await API.post(
-          `/course/upload/627caf233da5a1a04ba4f617/${key}`,
-          formDataImage
-        )
-      }
-
-      // await Axios.patch(
-      //   `/course/addFilePath/627caf233da5a1a04ba4f617/${file.name}`
-      // )
-      // files[key].map((pdf, key) => {
-    })
+        // files[key].map((pdf, key) => {
+      })
+    } catch (error) {
+      dispatch({
+        type: "SET_FEEDBACK_OBJECT",
+        payload: { feedback: error?.response?.data, severity: "error" },
+      })
+    }
   }
 
   const handleAddFile = async (e) => {
@@ -74,12 +84,6 @@ function UploadCoursePage() {
       ...files,
       [type]: [...files[type], file],
     })
-    // setFiles({
-    //   ...files,
-    //   [type]: [...files[type], { [fileName]: formDataImage }],
-    // })
-
-    // Axios.patch("/course/updateCourse", { formData }, {})
   }
   return (
     <>
@@ -91,37 +95,20 @@ function UploadCoursePage() {
           {/* Course inputs */}
           <Stack spacing={2} style={{ width: "200px" }}>
             <TextField
-              name="branchName"
-              select
-              label="Branch"
-              onChange={handleChange}
-            >
-              {branches.map((option) => (
-                <MenuItem key={option.name} value={option.name}>
-                  {option.name}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              name="class"
+              name="classId"
               select
               label="Class"
               onChange={handleChange}
             >
-              {branches[0].classes.map((classe) => (
-                <MenuItem key={classe} value={classe}>
-                  {classe}
+              {classes.map((classe) => (
+                <MenuItem key={classe._id} value={classe._id}>
+                  {classe.title}
                 </MenuItem>
               ))}
             </TextField>
             <TextField
-              name="courseName"
+              name="title"
               label="Course name"
-              onChange={handleChange}
-            />
-            <TextField
-              name="level"
-              label="Course level"
               onChange={handleChange}
             />
           </Stack>

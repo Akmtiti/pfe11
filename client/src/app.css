@@ -1,0 +1,364 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+html {
+  font-size: 16px !important;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    -webkit-animation: App-logo-spin infinite 20s linear;
+            animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@-webkit-keyframes App-logo-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.active-pink-2 input[type="text"]:focus:not([readonly]) {
+  border-bottom: 1px solid #40ee6c;
+  -webkit-box-shadow: 0 1px 0 0 #5edd45;
+          box-shadow: 0 1px 0 0 #5edd45;
+}
+
+fieldset,
+label {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin: 10px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.on {
+  color: #eeff00;
+}
+
+.off {
+  color: #ccc;
+}
+
+.adminPage {
+  padding: 1rem;
+}
+
+.adminPage table * {
+  text-align: center;
+}
+
+.teachersPage, .uploadCoursePage {
+  min-height: calc(100vh - 79px);
+  padding: 1rem;
+  margin-bottom: 3rem;
+}
+
+.uploadCoursePage {
+  padding: 3rem;
+  /* display: grid;
+  place-items: center; */
+}
+
+.upload-file-button-container > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+}
+
+.upload-file-button-container button {
+  height: 56px;
+  min-width: 120px;
+}
+
+.uploadCoursePage .submit-button {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+}
+
+.classes-container {
+  border: 1px dashed #9e7f29;
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 115px;
+  overflow-y: auto;
+}
+
+.classes-container > div {
+  margin: 5px;
+}
+
+.classes-container .class {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 4px 8px;
+  border-radius: 40px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #000;
+  background-color: #fff;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: 5px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.classes-container .class:hover {
+  background-color: rgba(24, 130, 155, 0.6);
+}
+
+.classes-container .class.active {
+  background-color: rgba(24, 130, 155, 0.6);
+}
+
+.login-container {
+  margin-top: 10%;
+  border: 0px solid #CCD1D1;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 0px 28px 0 black;
+          box-shadow: 0 0px 28px 0 black;
+  max-width: 50%;
+  background: #FFF;
+  z-index: 1;
+  position: relative;
+}
+
+img.triangleA {
+  position: absolute;
+  margin-left: -16px;
+  width: 60px;
+  border-radius: 12px 0px 0px 0px;
+}
+
+img.triangleB {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  width: 360px;
+  z-index: 0;
+}
+
+.welcome_auth {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.auth_welcome a {
+  font-weight: 400;
+}
+
+.auth_welcome {
+  font-weight: 100;
+  font-size: 1.5em;
+  background: -webkit-linear-gradient(45deg, #07dd97, #beffe7);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: black;
+  max-width: 170px;
+}
+
+a.auth_branding_in img {
+  width: 60px;
+  height: 60px;
+  border-radius: 1000px;
+}
+
+.login-form {
+  background: #fbfbfb;
+  border-radius: 0px 12px 12px 0px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.login_form_in {
+  padding: 4em 1em;
+}
+
+.login-form h1 {
+  font-size: 1.2em;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #969696;
+  line-height: 1.5em;
+  padding: 1.2em 0px .8em;
+}
+
+.lni {
+  display: inline-block;
+  font: normal normal normal 1em/1 'LineIcons';
+  speak: none;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.google_signup {
+  margin-top: .8em;
+}
+
+.google_signup a {
+  background: #DB4437;
+  color: #FFF;
+  display: block;
+  text-align: center;
+  padding: 12px 4px;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #5d00ff;
+  border-color: #5d00ff;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #2900b7;
+  border-color: #2900b7;
+}
+
+.google_signup a {
+  background: #DB4437;
+  color: #FFF;
+  display: block;
+  text-align: center;
+  padding: 12px 4px;
+  border-radius: 5px;
+}
+
+.google_signup a:hover {
+  background: #d81505;
+  color: #FFF;
+}
+
+.other_auth_links a:nth-child(2) {
+  float: right;
+}
+
+a {
+  text-decoration: none;
+  color: #afafaf;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #616161;
+}
+
+.alert-success {
+  background-color: #beffe7;
+  color: #07dd97;
+  font-size: .9em;
+}
+
+.forget-password-container {
+  width: 100%;
+  margin: auto;
+}
+/*# sourceMappingURL=app.css.map */

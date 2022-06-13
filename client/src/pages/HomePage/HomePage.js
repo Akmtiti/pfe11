@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Button from "react-bootstrap/Button"
-import Search from "../../search"
-import StarRating from "../../StarRating.js"
+import Search from "../../globalComponents/search"
+import StarRating from "../../globalComponents/StarRating.js"
 import Signup from "./homePageComponents/Singup"
 import Login from "./homePageComponents/Login"
 import Teachers from "./homePageComponents/Teachers"
@@ -9,8 +9,8 @@ import Courses from "./homePageComponents/Courses"
 import ContactUs from "./homePageComponents/ContactUs"
 import StudentReview from "./homePageComponents/StudentReview"
 import { Link } from "react-router-dom"
-import Header from './../../components/Header';
-import Footer from './../../components/Footer';
+import Header from '../../globalComponents/Header';
+import Footer from '../../globalComponents/Footer';
 
 function HomePage() {
   const [connectedUser, setConnectedUser] = useState("")

@@ -14,7 +14,7 @@ import {
   SET_USER_FEEDBACK,
 } from "../../store/constants"
 import { useDispatch } from "react-redux"
-import { API } from "../../axios"
+import { API } from "../../api"
 
 export default function ShowConfirmationDialog({
   classes,

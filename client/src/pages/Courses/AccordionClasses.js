@@ -4,21 +4,38 @@ import AccordionSummary from "@mui/material/AccordionSummary"
 import AccordionDetails from "@mui/material/AccordionDetails"
 import Typography from "@mui/material/Typography"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import { useSelector } from "react-redux"
+import { API } from "../../api"
 
-const courses = ["course1", "course2", "course3"]
+export default function AccordionClasses({ classe }) {
+  const { courses } = useSelector((state) => state.course)
 
-export default function AccordionClasses(props) {
   return (
     <div>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>{props.classe}</Typography>
+          <Typography>{classe.title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-          pariatur autem molestiae maxime doloribus laborum sit fugit voluptate
-          vitae atque exercitationem, beatae deleniti numquam vero id obcaecati
-          assumenda ab? Alias?
+          {courses
+            .filter((course) => course.classId === classe._id)
+            .map((course, key) => (
+              <Accordion key={key}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>{course.title}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  {course?.filesPath.map((file, key) => (
+                    <a
+                      key={key}
+                      href={`${API.defaults.baseURL}/courseFiles/${course._id}/${file}`}
+                    >
+                      {file.slice(file.indexOf("/") + 1)} <br/>
+                    </a>
+                  ))}
+                </AccordionDetails>
+              </Accordion>
+            ))}
         </AccordionDetails>
       </Accordion>
     </div>

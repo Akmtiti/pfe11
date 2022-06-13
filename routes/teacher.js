@@ -1,12 +1,22 @@
 import express from "express"
-const router = express.Router()
+import auth from "../middleware/auth.js"
 
-import userModel from "../models/userModel.js"
-import { createTeacher } from "./../controllers/teacher.js"
+import {
+  findOneTeacher,
+  findAllTeacher,
+  createTeacher,
+  updateTeacher,
+  deleteOneTeacher,
+} from "../controllers/teacher.js"
 
-router.post("/user/createTeacher", createTeacher)
-router.get("/user/getTeachers", async (req, res) =>
-  res.send(await userModel.find({ privilege: "teacher" }, { password: 0 }))
-)
+export const teacherRoutes = express.Router()
 
-export default router
+teacherRoutes.get("/findOne/:id", findOneTeacher)
+teacherRoutes.get("/findAll", findAllTeacher)
+
+teacherRoutes.post("/create",  createTeacher)
+
+teacherRoutes.patch("/update/:id",  updateTeacher)
+
+teacherRoutes.delete("/delete/:id",  deleteOneTeacher)
+

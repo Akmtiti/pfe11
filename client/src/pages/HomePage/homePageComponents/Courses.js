@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button"
 
 import React, { useEffect, useState } from "react"
-import { API } from "../../../axios"
+import { API } from "../../../api"
 // assets/images/mecan.jpg
 // assets/images/inconnue.jpg
 // assets/images/deeplr.jpg

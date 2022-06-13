@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Button from "react-bootstrap/Button"
-import { API } from "../../../axios"
-import StarRating from "../../../StarRating"
+import { API } from "../../../api"
+import StarRating from "../../../globalComponents/StarRating"
 
 function ContactUs() {
   const [name, setName] = useState("")
