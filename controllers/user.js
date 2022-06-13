@@ -1,4 +1,4 @@
-import User from "../models/userModel.js"
+import User from "../models/user.js"
 import bcrypt from "bcrypt"
 export const deleteUser = async (req, res) => {
   const { id } = req.params

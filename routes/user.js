@@ -10,7 +10,7 @@ import {
   getFields,
   addEditUser,
 } from "../controllers/user.js"
-import userModel from "../models/userModel.js"
+import userModel from "../models/user.js"
 
 router.put("/user/addEditUser", addEditUser)
 

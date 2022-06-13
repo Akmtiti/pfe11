@@ -9,8 +9,8 @@ import Courses from "./homePageComponents/Courses"
 import ContactUs from "./homePageComponents/ContactUs"
 import StudentReview from "./homePageComponents/StudentReview"
 import { Link } from "react-router-dom"
-import Header from './../../components/Header';
-import Footer from './../../components/Footer';
+import Header from '../../globalComponents/Header';
+import Footer from '../../globalComponents/Footer';
 
 function HomePage() {
   const [connectedUser, setConnectedUser] = useState("")

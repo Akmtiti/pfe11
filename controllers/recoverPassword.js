@@ -1,5 +1,5 @@
 import EmailSender from "../functions/EmailSender.js"
-import User from "../models/userModel.js"
+import User from "../models/user.js"
 import { sha256 } from "js-sha256"
 import bcrypt from "bcrypt"
 

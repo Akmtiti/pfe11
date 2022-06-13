@@ -1,7 +1,8 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client";
+
 import HomePage from "./pages/HomePage/HomePage"
-import "./globalStyle.css"
+import "./styles.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import AdminPage from "./pages/Admin/AdminPage"
 import { store } from "./store/store"
@@ -9,6 +10,7 @@ import { Provider } from "react-redux"
 import TeachersPage from "./pages/Teachers/TeachersPage"
 import CoursesPage from "./pages/Courses/CoursesPage"
 import UploadCoursePage from "./pages/UploadCourse/UploadCoursePage"
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const App = () => {
   return (
@@ -26,4 +28,4 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("root"))
+root.render(<App />)

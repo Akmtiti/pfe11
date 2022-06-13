@@ -45,3 +45,34 @@ export const UPDATE_BRANCH = 'UPDATE_BRANCH';
 export const DELETE_BRANCH = 'DELETE_BRANCH';
 
 
+
+//! ------------- CLASS -----------------
+export const LOADING_CLASS = 'LOADING_CLASS';
+export const END_LOADING_CLASS = 'END_LOADING_CLASS';
+export const SET_CLASS = 'SET_CLASS';
+export const SET_CLASSES = 'SET_CLASSES';
+export const ADD_CLASS = 'ADD_CLASS';
+export const UPDATE_CLASS = 'UPDATE_CLASS';
+export const DELETE_CLASS = 'DELETE_CLASS';
+
+
+//! ------------- STUDENT -----------------
+export const LOADING_STUDENT = 'LOADING_STUDENT';
+export const END_LOADING_STUDENT = 'END_LOADING_STUDENT';
+export const SET_STUDENT = 'SET_STUDENT';
+export const SET_STUDENTS = 'SET_STUDENTS';
+export const ADD_STUDENT = 'ADD_STUDENT';
+export const UPDATE_STUDENT = 'UPDATE_STUDENT';
+export const DELETE_STUDENT = 'DELETE_STUDENT';
+
+//! ------------- TEACHER -----------------
+export const LOADING_TEACHER = 'LOADING_TEACHER';
+export const END_LOADING_TEACHER = 'END_LOADING_TEACHER';
+export const SET_TEACHER = 'SET_TEACHER';
+export const SET_TEACHERS = 'SET_TEACHERS';
+export const ADD_TEACHER = 'ADD_TEACHER';
+export const UPDATE_TEACHER = 'UPDATE_TEACHER';
+export const DELETE_TEACHER = 'DELETE_TEACHER';
+
+
+

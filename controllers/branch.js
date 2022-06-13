@@ -16,13 +16,7 @@ export const findOneBranch = async (req, res) => {
 }
 
 export const findAllBranch = async (req, res) => {
-  const { filters = {}, fields = {} } = req.body
-
-  let found = await Branch.find(filters, fields)
-
-  // delete found._doc.password
-  // delete found._doc.accessToken
-  // delete found._doc.refreshToken
+  let found = await Branch.find().populate("classes")
 
   res.send(found)
 }
@@ -33,7 +27,7 @@ export const updateBranch = async (req, res) => {
   delete req.body._id
 
   let updated = await Branch.findOneAndUpdate(
-    {_id : id},
+    { _id: id },
     { $set: req.body },
     { returnOriginal: false }
   )
@@ -44,7 +38,7 @@ export const updateBranch = async (req, res) => {
 export const deleteOneBranch = async (req, res) => {
   const { id } = req.params
 
-  await Branch.deleteOne({_id :id})
+  await Branch.deleteOne({ _id: id })
 
   res.send("Delete success.")
 }

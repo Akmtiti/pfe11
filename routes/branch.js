@@ -12,7 +12,7 @@ import {
 export const branchRoutes = express.Router()
 
 branchRoutes.get("/findOne/:id", findOneBranch)
-branchRoutes.post("/findAll", findAllBranch)
+branchRoutes.get("/findAll", findAllBranch)
 
 branchRoutes.post("/create", auth, createBranch)
 

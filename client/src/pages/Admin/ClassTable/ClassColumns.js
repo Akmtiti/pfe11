@@ -1,11 +1,12 @@
 import React from "react"
 import moment from "moment"
 import DeleteIcon from "@mui/icons-material/Delete"
-import { deleteBranch } from "src/store/actions/branch"
+import { deleteClass } from "src/store/actions/class"
+import { IconButton } from "@mui/material"
 
-function BranchColumns(dispatch) {
+function ClassColumns(dispatch) {
   const handleDelete = async (row) => {
-    dispatch(deleteBranch(row.id))
+    dispatch(deleteClass(row.id))
   }
 
   let columns = [
@@ -13,23 +14,32 @@ function BranchColumns(dispatch) {
       field: "createdAt",
       headerName: "Date de création",
       valueFormatter: (params) =>
-      moment(params.value).format("DD/MM/YYYY HH:mm"),
+        moment(params.value).format("DD/MM/YYYY HH:mm"),
     },
     {
-      field: "name",
-      headerName: "Nom de la branche",
+      editable : true,
+      field: "title",
+      headerName: "Titre",
+    },
+    {
+      editable : true,
+      field: "department",
+      headerName: "Département",
     },
     {
       field: "action",
       headerName: "Action",
-
       renderCell: (rowData) => (
-        <DeleteIcon color="error" onClick={() => handleDelete(rowData)} />
+        <>
+        <IconButton onClick={() => handleDelete(rowData)}>
+          <DeleteIcon color="error" />
+        </IconButton>
+        {/* <AddEditBranchDialog mode="Edit" /> */}
+      </>
       ),
     },
-  ]
+  ] // Center columns, filed and headerName
 
-  // Center columns, filed and headerName
   columns = columns.map(
     (column, index) =>
       (column = {
@@ -42,11 +52,10 @@ function BranchColumns(dispatch) {
         ...column,
       })
   )
-
   return columns
 }
 
-export default BranchColumns
+export default ClassColumns
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)

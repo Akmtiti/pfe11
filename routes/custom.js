@@ -2,7 +2,7 @@ import express from "express"
 import courseModel from "../models/courseModel.js"
 import { createCourse } from "../controllers/course.js"
 import branchModel from "../models/branch.js"
-import userModel from "../models/userModel.js"
+import userModel from "../models/user.js"
 const router = express.Router()
 
 const schemes = {

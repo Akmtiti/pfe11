@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { API } from "../../../axios"
+import { API } from "../../../api"
 import Button from "react-bootstrap/Button"
 
 function Login({ setConnectedUser }) {

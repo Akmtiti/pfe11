@@ -5,14 +5,13 @@ import AccordionDetails from "@mui/material/AccordionDetails"
 import Typography from "@mui/material/Typography"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 
-const courses = ["course1", "course2", "course3"]
 
-export default function AccordionClasses(props) {
+export default function AccordionClasses({classe}) {
   return (
     <div>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>{props.classe}</Typography>
+          <Typography>{classe.title}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum

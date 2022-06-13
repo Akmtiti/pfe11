@@ -11,9 +11,9 @@ import React from "react"
 import { Fragment } from "react"
 import { useState } from "react"
 import { ReactReduxContext } from "react-redux"
-import Footer from "../../components/Footer"
-import Header from "../../components/Header"
-import { API } from "./../../axios"
+import Footer from "../../globalComponents/Footer"
+import Header from "../../globalComponents/Header"
+import { API } from "../../api"
 
 const branches = [
   { name: "branch1", classes: ["class1", "class2", "class3"] },

@@ -137,3 +137,40 @@ button {
 
 
 }
+
+//! ------------ Class chip select ------------- |
+.classes-container {
+  border: 1px dashed rgb(158, 127, 41);
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 115px;
+  overflow-y: auto;
+}
+
+.classes-container > div {
+  margin: 5px;
+}
+
+.classes-container .class {
+  width: fit-content;
+  height: fit-content;
+  padding: 4px 8px;
+  border-radius: 40px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #000;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.classes-container .class:hover {
+  background-color: rgba(24, 130, 155, 0.6);
+}
+
+.classes-container .class.active {
+  background-color: rgba(24, 130, 155, 0.6);
+}

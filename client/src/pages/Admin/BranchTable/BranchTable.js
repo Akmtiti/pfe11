@@ -4,12 +4,12 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import BranchColumns from "./BranchColumns"
-import DataGridComponent from "./DataGridComponent/DataGridComponent"
+import DataGridComponent from "../DataGridComponent/DataGridComponent"
 import { Button, InputLabel, Stack, TextField } from "@mui/material"
 import { createBranch } from "src/store/actions/branch"
 
 function BranchDataGrid() {
-  const [newBranch, setNewBranch] = useState("")
+  const [branchTitle, setBranchTitle] = useState("")
 
   const dispatch = useDispatch()
   const [rows, setRows] = useState([])
@@ -27,10 +27,8 @@ function BranchDataGrid() {
   }, [branches])
 
   const submit = async () => {
-    console.log(newBranch)
 
-
-    dispatch(createBranch({name : newBranch}))
+    dispatch(createBranch({title : branchTitle}))
   }
 
   return (
@@ -39,7 +37,7 @@ function BranchDataGrid() {
       <Stack direction="row" alignItems="center" spacing={2}>
         <TextField
           label="Branche"
-          onChange={(e) => setNewBranch(e.target.value)}
+          onChange={(e) => setBranchTitle(e.target.value)}
         />
         <Button onClick={submit}>Confirmer</Button>
       </Stack>

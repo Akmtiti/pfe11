@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Button from "react-bootstrap/Button"
-import { API } from "../../../axios"
+import { API } from "../../../api"
 import StarRating from "../../../StarRating"
 
 function ContactUs() {

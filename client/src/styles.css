@@ -156,4 +156,49 @@ button {
   top: 3rem;
   right: 3rem;
 }
-/*# sourceMappingURL=globalStyle.css.map */
+
+.classes-container {
+  border: 1px dashed #9e7f29;
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 115px;
+  overflow-y: auto;
+}
+
+.classes-container > div {
+  margin: 5px;
+}
+
+.classes-container .class {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 4px 8px;
+  border-radius: 40px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #000;
+  background-color: #fff;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: 5px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.classes-container .class:hover {
+  background-color: rgba(24, 130, 155, 0.6);
+}
+
+.classes-container .class.active {
+  background-color: rgba(24, 130, 155, 0.6);
+}
+/*# sourceMappingURL=styles.css.map */
