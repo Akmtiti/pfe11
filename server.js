@@ -7,7 +7,7 @@ import authenticateToken from "./middleware/authenticateToken.js"
 import { deleteToken } from "./controllers/manageAccessToken.js"
 import { verifyToken } from "./controllers/manageAccessToken.js"
 import userRouter from "./routes/user.js"
-import courseRouter from "./routes/course.js"
+import  { CourseRoutes } from "./routes/course.js"
 import reviewRouter from "./routes/review.js"
 import contactUsRouter from "./routes/contactUs.js"
 import customRouter from "./routes/custom.js"
@@ -27,12 +27,12 @@ deleteToken()
 // app.use(authenticateToken)
 
 app.use(userRouter)
-app.use(courseRouter)
 app.use(reviewRouter)
 app.use(contactUsRouter)
 app.use(customRouter)
 
 
+app.use("/course", CourseRoutes)
 app.use("/student", studentRoutes)
 app.use("/teacher", teacherRoutes)
 app.use("/branches", branchRoutes)

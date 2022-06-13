@@ -75,4 +75,12 @@ export const UPDATE_TEACHER = 'UPDATE_TEACHER';
 export const DELETE_TEACHER = 'DELETE_TEACHER';
 
 
+//! ------------- COURSE -----------------
+export const LOADING_COURSE = 'LOADING_COURSE';
+export const END_LOADING_COURSE = 'END_LOADING_COURSE';
+export const SET_COURSE = 'SET_COURSE';
+export const SET_COURSES = 'SET_COURSES';
+export const ADD_COURSE = 'ADD_COURSE';
+export const UPDATE_COURSE = 'UPDATE_COURSE';
+export const DELETE_COURSE = 'DELETE_COURSE';
 

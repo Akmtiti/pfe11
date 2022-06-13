@@ -71,3 +71,15 @@ export const updateTeacher = (id, updatedTeacher) =>
   API.patch(`/teacher/update/${id}`, updatedTeacher)
 
 export const deleteTeacher = (id) => API.delete(`/teacher/delete/${id}`)
+
+/* //! ----------- Course -------------- */
+export const findCourse = (id) => API.get(`/course/findOne/${id}`)
+
+export const findCourses = () => API.get("/course/findAll")
+
+export const createCourse = (newCourse) => API.post("/course/create", newCourse)
+
+export const updateCourse = (id, updatedCourse) =>
+  API.patch(`/course/update/${id}`, updatedCourse)
+
+export const deleteCourse = (id) => API.delete(`/course/delete/${id}`)

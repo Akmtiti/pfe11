@@ -54,7 +54,7 @@ function Login({ setConnectedUser }) {
           Login
         </button>
         <p>{feedback}</p>
-        <Button variant="link">Forget password</Button>
+        <Button href ="/forgot_password" variant="link">Forget password</Button>
       </div>
     </div>
   )

@@ -2,6 +2,7 @@ import { applyMiddleware, configureStore } from "@reduxjs/toolkit"
 import thunk from "redux-thunk"
 import { branch } from "./reducers/branch"
 import { classReducer } from "./reducers/class"
+import { course } from "./reducers/course"
 import dataGrid from "./reducers/dataGrid"
 
 import notification from "./reducers/notification"
@@ -21,6 +22,7 @@ export const store = configureStore(
       class: classReducer,
       student: student,
       teacher: teacher,
+      course: course,
     },
   },
   applyMiddleware(thunk)

@@ -7,7 +7,6 @@ import { SET_SELECTED_ROW } from "src/store/constants.js"
 function DataGridComponent(props) {
   const dispatch = useDispatch()
   const { selectedRow } = useSelector((state) => state.dataGrid)
-  console.log(selectedRow)
 
   const handleEditRow = async (newRow, oldRow) => {
     dispatch(props.onRowEdit(newRow._id, newRow))

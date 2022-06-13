@@ -1,12 +1,12 @@
 import express from "express"
-import courseModel from "../models/courseModel.js"
+import course from "../models/course.js"
 import { createCourse } from "../controllers/course.js"
 import branchModel from "../models/branch.js"
 import userModel from "../models/user.js"
 const router = express.Router()
 
 const schemes = {
-  user : userModel,
+  user: userModel,
   branch: branchModel,
   class: branchModel,
 }
@@ -67,7 +67,13 @@ const custom = async (req, res) => {
     var returnedDocument
     switch (req.body.method) {
       case "get":
-        returnedDocument = await selectedScheme.find(filters, {...fields, password : 0, passwordRecovery :0, refreshToken :0, token : 0})
+        returnedDocument = await selectedScheme.find(filters, {
+          ...fields,
+          password: 0,
+          passwordRecovery: 0,
+          refreshToken: 0,
+          token: 0,
+        })
         break
       case "post":
         returnedDocument = await selectedScheme.create(req.body)
@@ -87,9 +93,9 @@ const custom = async (req, res) => {
       default:
         returnedDocument = "Method is missing."
         break
-      }
+    }
 
-        res.send(returnedDocument)
+    res.send(returnedDocument)
   } catch (error) {
     res.status(500).send(error)
   }

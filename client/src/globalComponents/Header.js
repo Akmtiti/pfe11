@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material"
 import React from "react"
-import Search from "../search"
+import Search from "./search"
 
 const currentUser = JSON.parse(localStorage.getItem("currentUser"))
 function Header() {

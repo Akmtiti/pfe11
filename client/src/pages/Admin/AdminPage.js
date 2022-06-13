@@ -1,31 +1,14 @@
 import { Button, Stack } from "@mui/material"
-import AddIcon from "@mui/icons-material/Add"
 import React from "react"
 import { useState } from "react"
-import AddEditUserDialog from "./AddEditUserDialog"
-import { useEffect } from "react"
 
 import BranchDataGrid from "./BranchTable/BranchTable"
-import { findBranches } from "../../store/actions/branch"
 import ClassTable from "./ClassTable/ClassTable"
 import StudentTable from "./StudentTable/StudentTable"
 import TeacherTable from "./TeacherTable/TeacherTable"
-import { findTeachers } from "../../store/actions/teacher"
-import { findStudents } from "../../store/actions/student"
-import { findClasses } from "../../store/actions/class"
-import SnackbarFeedback from "../../globalComponents/SnackbarFeedback"
-import { useDispatch } from "react-redux"
 
 function AdminPage() {
   const [selectedSchemeTable, setSelectedSchemeTable] = useState("Teacher") // "Teacher" or "Student"
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(findStudents())
-    dispatch(findTeachers())
-    dispatch(findBranches())
-    dispatch(findClasses())
-  }, [])
 
   // Handles
   const handleUserSwitch = (selectedScheme) => {
@@ -48,7 +31,6 @@ function AdminPage() {
 
   return (
     <div className="adminPage">
-      <SnackbarFeedback />
 
       <Button
         href="/"
