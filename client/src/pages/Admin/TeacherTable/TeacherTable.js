@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import DataGridComponent from "../DataGridComponent/DataGridComponent"
 import {  updateTeacher } from "../../../store/actions/teacher"
 import TeacherColumns from "./TeacherColumns"
-import AddEditStudentDialog from "../StudentTable/AddEditStudentDialog"
+import AddEditTeacherDialog from "./AddEditTeacherDialog"
 
 function TeacherTable() {
   const dispatch = useDispatch()
@@ -30,7 +30,7 @@ function TeacherTable() {
 
   return (
    <div>
-     <AddEditStudentDialog mode="Add" />
+     <AddEditTeacherDialog mode="Add" />
     
      <DataGridComponent
        rows={rows}

@@ -9,33 +9,31 @@ function Header() {
       className="navbar custom-navbar navbar-fixed-top"
       role="navigation"
     >
-      <div className="container">
-        <div className="navbar-header">
-          <button
-            className="navbar-toggle"
-            data-toggle="collapse"
-            data-target=".navbar-collapse"
-          >
-            <span className="icon icon-bar"></span>
-            <span className="icon icon-bar"></span>
-            <span className="icon icon-bar"></span>
-          </button>
-
-          <a href="/" className="navbar-brand">
-            {" "}
-            <img
-              src="http://www.issatso.rnu.tn/fo/images/logo.png"
-              alt="logo"
-              width="80"
-            ></img>{" "}
-          </a>
-        </div>
-
+      <div className="">
         <div className="collapse navbar-collapse">
           <ul
             style={{ width: "100%" }}
             className="nav navbar-nav navbar-nav-first"
           >
+            <div className="navbar-header">
+              <button
+                className="navbar-toggle"
+                data-toggle="collapse"
+                data-target=".navbar-collapse"
+              >
+                <span className="icon icon-bar"></span>
+                <span className="icon icon-bar"></span>
+                <span className="icon icon-bar"></span>
+              </button>
+
+              <a href="/" className="navbar-brand">
+                <img
+                  src="http://www.issatso.rnu.tn/fo/images/logo.png"
+                  alt="logo"
+                  width="80"
+                ></img>{" "}
+              </a>
+            </div>
             <li>
               <a href="#top" className="smoothScroll">
                 Home
@@ -67,11 +65,11 @@ function Header() {
               </a>
             </li>
             {/* {currentUser?.privilege === "admin" && ( */}
-              <li>
-                <a href="/admin">
-                  <i className="smoothScroll"></i> Admin page
-                </a>
-              </li>
+            <li>
+              <a href="/admin">
+                <i className="smoothScroll"></i> Admin page
+              </a>
+            </li>
             {/* )} */}
             <li>
               <a href="/teachers">
@@ -84,11 +82,11 @@ function Header() {
               </a>
             </li>
             {/* {currentUser?.privilege === "Teacher" && ( */}
-              <li>
-                <a href="/uploadCourse">
-                  <i className="smoothScroll"></i> Uplaod Page
-                </a>
-              </li>
+            <li>
+              <a href="/uploadCourse">
+                <i className="smoothScroll"></i> Uplaod Page
+              </a>
+            </li>
             {/* )} */}
           </ul>
 

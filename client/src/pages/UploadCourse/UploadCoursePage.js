@@ -10,15 +10,16 @@ import {
 import React from "react"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import Footer from "../../globalComponents/Footer"
-import Header from "../../globalComponents/Header"
 import { API } from "../../api"
+import { getBase64 } from "../../functions/fileFunction"
 import { createCourse } from "../../store/actions/course"
+import { UploadButtons } from "./UploadButtons"
 
 function UploadCoursePage() {
   const currentUser = JSON.parse(localStorage.getItem("user"))
   const dispatch = useDispatch()
   const { classes } = useSelector((state) => state.class)
+  const [currentPdf, setCurrentPdf] = useState("")
 
   const [files, setFiles] = useState({
     course: [],
@@ -85,129 +86,43 @@ function UploadCoursePage() {
       [type]: [...files[type], file],
     })
   }
+
+  const handleCurrentPdf = async (pdf) => {
+    setCurrentPdf(await getBase64(pdf))
+  }
   return (
-    <>
-      <Header />
-      <div className="uploadCoursePage">
-        <h1>Upload Course</h1>
+    <div className="uploadCoursePage">
+      <h1>Upload Course</h1>
 
-        <Stack spacing={2}>
-          {/* Course inputs */}
-          <Stack spacing={2} style={{ width: "200px" }}>
-            <TextField
-              name="classId"
-              select
-              label="Class"
-              onChange={handleChange}
-            >
-              {classes.map((classe) => (
-                <MenuItem key={classe._id} value={classe._id}>
-                  {classe.title}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              name="title"
-              label="Course name"
-              onChange={handleChange}
-            />
-          </Stack>
-
-          {/* Upload buttons */}
-          <Stack
-            spacing={2}
-            style={{ width: "200px" }}
-            className="upload-file-button-container"
+      <Stack spacing={2}>
+        {/* Course inputs */}
+        <Stack spacing={2} style={{ width: "200px" }}>
+          <TextField
+            name="classId"
+            select
+            label="Class"
+            onChange={handleChange}
           >
-            <div>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  document.getElementById("course").click()
-                }}
-              >
-                {" "}
-                Add Course
-              </Button>
-              {files.course.map((pdf, key) => (
-                <Tooltip key={key} title={pdf.name}>
-                  <CardMedia
-                    component="img"
-                    style={{ width: "25%" }}
-                    image="assets/images/pdf.png"
-                  />
-                </Tooltip>
-              ))}
-            </div>
-            <div>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  document.getElementById("TD").click()
-                }}
-              >
-                Add TD
-              </Button>
+            {classes.map((classe) => (
+              <MenuItem key={classe._id} value={classe._id}>
+                {classe.title}
+              </MenuItem>
+            ))}
+          </TextField>
+          <TextField name="title" label="Course name" onChange={handleChange} />
+        </Stack>
 
-              {files.TD.map((pdf, key) => (
-                <Tooltip key={key} title={pdf.name}>
-                  <CardMedia
-                    component="img"
-                    style={{ width: "25%" }}
-                    image="assets/images/pdf.png"
-                  />
-                </Tooltip>
-              ))}
-            </div>
-            <div>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  document.getElementById("TP").click()
-                }}
-              >
-                {" "}
-                Add TP
-              </Button>
-              {files.TP.map((pdf, key) => (
-                <Tooltip key={key} title={pdf.name}>
-                  <CardMedia
-                    component="img"
-                    style={{ width: "25%" }}
-                    image="assets/images/pdf.png"
-                  />
-                </Tooltip>
-              ))}
-            </div>
-            <div>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  document.getElementById("examen").click()
-                }}
-              >
-                Add Exam
-              </Button>
-              {files.examen.map((pdf, key) => (
-                <Tooltip key={key} title={pdf.name}>
-                  <CardMedia
-                    component="img"
-                    style={{ width: "25%" }}
-                    image="assets/images/pdf.png"
-                  />
-                </Tooltip>
-              ))}
-            </div>
-          </Stack>
-          <Button
-            variant="contained"
-            onClick={handleSubmit}
-            sx={{ width: "10%" }}
-          >
-            Submit
-          </Button>
+        {/* Upload buttons */}
+        {UploadButtons(files, handleCurrentPdf)}
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          sx={{ width: "10%" }}
+        >
+          Submit
+        </Button>
 
-          {/* <a
+        {/* <a
             href="http://localhost:8001/courseFiles/627caf233da5a1a04ba4f617/TP/RapportPFE.pdf"
             download
             rel="noopener noreferrer"
@@ -216,15 +131,24 @@ function UploadCoursePage() {
             Download File
           </a> */}
 
-          {/* <iframe
-            src="http://localhost:8001/courseFiles/627caf233da5a1a04ba4f617/TP/RapportPFE.pdf"
-            width="100%"
-            height="500px"
-          ></iframe> */}
-        </Stack>
-      </div>
+        <iframe
+          src={currentPdf}
+          // src="http://localhost:8001/courseFiles/627caf233da5a1a04ba4f617/TP/RapportPFE.pdf"
+          width="100%"
+          height="500px"
+        ></iframe>
+      </Stack>
+      {hiddenInputs(handleAddFile)}
+    </div>
+  )
+}
 
-      <Footer />
+export default UploadCoursePage
+
+
+function hiddenInputs(handleAddFile) {
+  return (
+    <>
       <input
         style={{ display: "none" }}
         accept="application/pdf,application/vnd.ms-excel"
@@ -256,5 +180,3 @@ function UploadCoursePage() {
     </>
   )
 }
-
-export default UploadCoursePage

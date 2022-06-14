@@ -3,7 +3,8 @@ const { Schema } = mongoose
 
 const scheme = mongoose.Schema(
   {
-    title: { type: String, required: true },
+    title: String,
+    department: String,
     classes: [{ type: mongoose.Schema.Types.ObjectId, ref: "class" }],
   },
   {

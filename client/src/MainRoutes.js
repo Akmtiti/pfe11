@@ -14,7 +14,6 @@ import { findTeachers } from "./store/actions/teacher"
 import { findBranches } from "./store/actions/branch"
 import { findClasses } from "./store/actions/class"
 import { useEffect } from "react"
-import SnackbarFeedback from './globalComponents/SnackbarFeedback'
 import { findCourses } from './store/actions/course'
 
 function MainRoutes() {
@@ -28,8 +27,7 @@ function MainRoutes() {
     dispatch(findCourses())
   }, [])
   return (
-    <>
-      <SnackbarFeedback />
+      
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -40,7 +38,7 @@ function MainRoutes() {
         <Route path="/uploadCourse" element={<UploadCoursePage />} />
       </Routes>
       </BrowserRouter>
-    </>
+     
   )
 }
 
