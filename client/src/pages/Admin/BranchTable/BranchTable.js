@@ -7,6 +7,7 @@ import BranchColumns from "./BranchColumns"
 import DataGridComponent from "../DataGridComponent/DataGridComponent"
 import { Button, InputLabel, Stack, TextField } from "@mui/material"
 import { createBranch } from "src/store/actions/branch"
+import AddEditBranchDialog from "./AddEditBranchDialog"
 
 function BranchDataGrid() {
   const [branchTitle, setBranchTitle] = useState("")
@@ -32,17 +33,10 @@ function BranchDataGrid() {
   }
 
   return (
-    <Stack spacing={2}>
-      <InputLabel>Ajouter une branche</InputLabel>
-      <Stack direction="row" alignItems="center" spacing={2}>
-        <TextField
-          label="Branche"
-          onChange={(e) => setBranchTitle(e.target.value)}
-        />
-        <Button onClick={submit}>Confirmer</Button>
-      </Stack>
-      <DataGridComponent rows={rows} columns={columns} />
-    </Stack>
+    <>
+      <AddEditBranchDialog mode="Add" />
+        <DataGridComponent rows={rows} columns={columns} />
+    </>
   )
 }
 

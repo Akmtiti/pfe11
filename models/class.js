@@ -3,9 +3,10 @@ const { Schema } = mongoose
 
 const scheme = mongoose.Schema(
   {
-    title: { type: String, required: true },
-    department: String,
+    branch: { type: mongoose.Schema.Types.ObjectId, ref: "branch" },
     courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "course" }],
+
+    title: { type: String, required: true },
   },
   { timestamps: true }
 )

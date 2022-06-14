@@ -3,6 +3,7 @@ import moment from "moment"
 import DeleteIcon from "@mui/icons-material/Delete"
 import { deleteClass } from "src/store/actions/class"
 import { IconButton } from "@mui/material"
+import AddEditClassDialog from "./AddEditClassDialog"
 
 function ClassColumns(dispatch) {
   const handleDelete = async (row) => {
@@ -17,25 +18,20 @@ function ClassColumns(dispatch) {
         moment(params.value).format("DD/MM/YYYY HH:mm"),
     },
     {
-      editable : true,
+      editable: true,
       field: "title",
       headerName: "Titre",
-    },
-    {
-      editable : true,
-      field: "department",
-      headerName: "Département",
     },
     {
       field: "action",
       headerName: "Action",
       renderCell: (rowData) => (
         <>
-        <IconButton onClick={() => handleDelete(rowData)}>
-          <DeleteIcon color="error" />
-        </IconButton>
-        {/* <AddEditBranchDialog mode="Edit" /> */}
-      </>
+          <IconButton onClick={() => handleDelete(rowData)}>
+            <DeleteIcon color="error" />
+          </IconButton>
+          <AddEditClassDialog mode="Edit" />
+        </>
       ),
     },
   ] // Center columns, filed and headerName

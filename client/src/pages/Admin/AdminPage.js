@@ -8,7 +8,7 @@ import StudentTable from "./StudentTable/StudentTable"
 import TeacherTable from "./TeacherTable/TeacherTable"
 
 function AdminPage() {
-  const [selectedSchemeTable, setSelectedSchemeTable] = useState("Teacher") // "Teacher" or "Student"
+  const [selectedSchemeTable, setSelectedSchemeTable] = useState("Class") // "Teacher" or "Student"
 
   // Handles
   const handleUserSwitch = (selectedScheme) => {
