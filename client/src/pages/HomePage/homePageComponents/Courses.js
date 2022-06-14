@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button"
 
 import React, { useEffect, useState } from "react"
 import { API } from "../../../api"
+import { useSelector } from "react-redux"
 // assets/images/mecan.jpg
 // assets/images/inconnue.jpg
 // assets/images/deeplr.jpg
@@ -32,11 +33,9 @@ const fetchedCourses = [
 //   "__v": 0
 // }
 function Courses() {
-  const [fetchedCourses, setFetchedCourses] = useState([])
+  const { courses} = useSelector((state) => state.course)
+  
 
-  useEffect(async () => {
-    setFetchedCourses((await API.get("/course/getCourses")).data)
-  }, [])
   return (
     <section id="courses">
       <div className="container">
@@ -59,7 +58,7 @@ function Courses() {
   )
 
   function renderCourses() {
-    return fetchedCourses.map((course, key) => (
+    return courses.map((course, key) => (
       <div key={key} className="col-md-4 col-sm-4">
         <div className="item">
           <div className="courses-thumb">
