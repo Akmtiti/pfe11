@@ -15,7 +15,7 @@ const App = () => {
     <Provider store={store}>
       <SnackbarFeedback />
       <Header />
-     <div  style={{ minHeight: "100vh",  paddingTop: "80px" }}>
+     <div  style={{ minHeight: "100vh" }}>
        <MainRoutes />
      </div>
       <Footer />

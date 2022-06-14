@@ -37,7 +37,6 @@ function TeachersPage() {
           </Box>
         )}
       </div>
-      <Footer />
     </>
   )
 }

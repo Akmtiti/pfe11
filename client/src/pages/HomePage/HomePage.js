@@ -108,7 +108,6 @@ function HomePage() {
 
       <ContactUs />
 
-      <Footer />
     </div>
   )
 }

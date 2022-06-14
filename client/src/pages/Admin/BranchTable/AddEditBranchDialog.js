@@ -82,7 +82,7 @@ function AddEditBranchDialog({ mode }) {
               >
               {inputRender({ name: "title", label: "Titre" })}
             
-              {/* <ClassChipSelect setFormData={setFormData} formData={formData} />   */}
+              <ClassChipSelect setFormData={setFormData} formData={formData} />  
               </Stack>
           </DialogContent>
           <DialogActions>

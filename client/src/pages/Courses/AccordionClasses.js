@@ -28,6 +28,7 @@ export default function AccordionClasses({ classe }) {
                   {course?.filesPath.map((file, key) => (
                     <a
                       key={key}
+                      target="_blank"
                       href={`${API.defaults.baseURL}/courseFiles/${course._id}/${file}`}
                     >
                       {file.slice(file.indexOf("/") + 1)} <br/>

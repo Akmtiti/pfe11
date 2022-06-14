@@ -26,7 +26,6 @@ function CoursesPage() {
       <Header />
       <div className="teachersPage">
         <h1>Courses</h1>
-        <h1>Courses</h1>
 
         {branches.map((branch, key) => (
           <Accordion key={key}>
@@ -45,7 +44,6 @@ function CoursesPage() {
           </Accordion>
         ))}
       </div>
-      <Footer />
     </>
   )
 }

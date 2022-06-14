@@ -14,8 +14,8 @@ export const branchRoutes = express.Router()
 branchRoutes.get("/findOne/:id", findOneBranch)
 branchRoutes.get("/findAll", findAllBranch)
 
-branchRoutes.post("/create", auth, createBranch)
+branchRoutes.post("/create",  createBranch)
 
-branchRoutes.patch("/update/:id", auth, updateBranch)
+branchRoutes.patch("/update/:id",  updateBranch)
 
-branchRoutes.delete("/delete/:id", auth, deleteOneBranch)
+branchRoutes.delete("/delete/:id",  deleteOneBranch)
