@@ -1,9 +1,38 @@
 import { Stack } from "@mui/material"
-import React from "react"
-import Search from "./search"
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { logout } from "../api"
 
-const currentUser = JSON.parse(localStorage.getItem("currentUser"))
 function Header() {
+  const dispatch = useDispatch()
+  const { authData } = useSelector((state) => state.auth)
+
+  const navSwitch = () => {
+    switch (authData?.privilege) {
+      case "Teacher":
+        return (
+          <></>
+          // <li>
+          //   <a href="/search_courses">
+          //     <i className="smoothScroll"></i> Search Courses
+          //   </a>
+          // </li>
+        )
+
+      case "Admin":
+        return (
+          <li>
+            <a href="/admin">
+              <i className="smoothScroll"></i> Admin page
+            </a>
+          </li>
+        )
+
+      default:
+        break
+    }
+  }
+
   return (
     <section
       className="navbar custom-navbar navbar-fixed-top"
@@ -28,49 +57,47 @@ function Header() {
 
               <a href="/" className="navbar-brand">
                 <img
-                  src="http://www.issatso.rnu.tn/fo/images/logo.png"
+                  src="https://issatso.rnu.tn/assets/images/logo.png"
+                  // src="http://www.issatso.rnu.tn/fo/images/logo.png"
                   alt="logo"
                   width="80"
                 ></img>{" "}
               </a>
             </div>
-            <li>
-              <a href="#top" className="smoothScroll">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#team" className="smoothScroll">
-                Our Teachers
-              </a>
-            </li>
-            <li>
-              <a href="#courses" className="smoothScroll">
-                Courses
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="smoothScroll">
-                Contact
-              </a>
-            </li>
-            <li>
-              <a href="#testimonial" className="smoothScroll">
-                Reviews
-              </a>
-            </li>
-            <li>
-              <a href="#login">
-                <i className="smoothScroll"></i> Login
-              </a>
-            </li>
-            {/* {currentUser?.privilege === "admin" && ( */}
-            <li>
-              <a href="/admin">
-                <i className="smoothScroll"></i> Admin page
-              </a>
-            </li>
-            {/* )} */}
+            {window.location.pathname  == "/" && (
+              <>
+                <li>
+                  <a href="#top" className="smoothScroll">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#team" className="smoothScroll">
+                    Our Teachers
+                  </a>
+                </li>
+                <li>
+                  <a href="#courses" className="smoothScroll">
+                    Courses
+                  </a>
+                </li>
+                <li>
+                  <a href="#contact" className="smoothScroll">
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a href="#testimonial" className="smoothScroll">
+                    Reviews
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <i className="smoothScroll"></i> Login
+                  </a>
+                </li>
+              </>
+            )}
             <li>
               <a href="/teachers">
                 <i className="smoothScroll"></i> Teachers Page
@@ -81,24 +108,21 @@ function Header() {
                 <i className="smoothScroll"></i> Courses Page
               </a>
             </li>
-            {/* {currentUser?.privilege === "Teacher" && ( */}
-            <li>
-              <a href="/uploadCourse">
-                <i className="smoothScroll"></i> Uplaod Page
-              </a>
-            </li>
-            {/* )} */}
-          </ul>
+              <li>
+            <a href="/search_courses">
+              <i className="smoothScroll"></i> Search Courses
+            </a>
+          </li>
 
-          {/* <div className="search bar">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Search />
-          </div> */}
-          {currentUser && (
-            <div style={{ whiteSpace: "nowrap" }}>
-              Utilisateur connecté : {currentUser}{" "}
-            </div>
-          )}
+            {navSwitch()}
+            {authData && (
+              <li onClick={() => dispatch({ type: "LOGOUT" })}>
+                <a href="/">
+                  <i className="smoothScroll"></i> Déconnexion
+                </a>
+              </li>
+            )}
+          </ul>
         </div>
       </div>
     </section>

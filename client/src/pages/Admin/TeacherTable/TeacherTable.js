@@ -30,7 +30,9 @@ function TeacherTable() {
 
   return (
    <div>
-     <AddEditTeacherDialog mode="Add" />
+   <div  style={{textAlign: 'right',}}>
+      <AddEditTeacherDialog mode="Add" />
+   </div>
     
      <DataGridComponent
        rows={rows}

@@ -14,9 +14,9 @@ export const studentRoutes = express.Router()
 studentRoutes.get("/findOne/:id", findOneStudent)
 studentRoutes.get("/findAll", findAllStudent)
 
-studentRoutes.post("/create", auth, createStudent)
+studentRoutes.post("/create",  createStudent)
 
-studentRoutes.patch("/update/:id", auth, updateStudent)
+studentRoutes.patch("/update/:id",  updateStudent)
 
-studentRoutes.delete("/delete/:id", auth, deleteOneStudent)
+studentRoutes.delete("/delete/:id",  deleteOneStudent)
 

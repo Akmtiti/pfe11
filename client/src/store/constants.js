@@ -84,3 +84,9 @@ export const ADD_COURSE = 'ADD_COURSE';
 export const UPDATE_COURSE = 'UPDATE_COURSE';
 export const DELETE_COURSE = 'DELETE_COURSE';
 
+
+//! -------------- Auth ------------------ */ }
+
+export const AUTH = "AUTH"
+export const AUTH_ERROR = "AUTH_ERROR"
+export const LOGOUT = "LOGOUT"

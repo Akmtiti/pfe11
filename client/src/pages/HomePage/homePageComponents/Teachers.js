@@ -11,8 +11,10 @@ const fetchedTeachers = [
 ]
 function Teachers() {
   const [fetchedTeachers, setFetchedTeachers] = useState([])
-  useEffect(async () => {
-    setFetchedTeachers((await API.get("/user/getTeachers")).data)
+  useEffect( () => {
+    ;(async () => {
+      setFetchedTeachers((await API.get("/user/getTeachers")).data)
+    })()
   }, [])
 
   return (
@@ -25,7 +27,9 @@ function Teachers() {
                 Teachers <small>Meet Professional Trainers</small>
               </h2>
 
-              <Button href="/teachers" variant="link">Voir plus</Button>
+              <Button href="/teachers" variant="link">
+                Voir plus
+              </Button>
             </div>
 
             <div className="owl-carousel owl-theme owl-courses">

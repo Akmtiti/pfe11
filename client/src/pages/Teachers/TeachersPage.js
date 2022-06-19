@@ -9,14 +9,16 @@ import Footer from "../../globalComponents/Footer"
 
 function TeachersPage() {
   const [fetchedTeachers, setFetchedTeachers] = useState([])
-  useEffect(async () => {
-    setFetchedTeachers(
-      (
-        await API.get("/user/getFields", {
-          params: { filter: { privilege: "Teacher" } },
-        })
-      ).data
-    )
+  useEffect(() => {
+    ;(async () => {
+      setFetchedTeachers(
+        (
+          await API.get("/user/getFields", {
+            params: { filter: { privilege: "Teacher" } },
+          })
+        ).data
+      )
+    })()
   }, [])
   return (
     <>

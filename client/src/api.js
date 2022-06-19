@@ -12,13 +12,25 @@ export const API = axios.create({
 })
 
 API.interceptors.request.use((req) => {
-  if (localStorage.getItem("profile")) {
+  if (localStorage.getItem("user")) {
     req.headers.Authorization = `Bearer ${
-      JSON.parse(localStorage.getItem("profile")).token
+      JSON.parse(localStorage.getItem("user")).token
     }`
   }
   return req
 })
+
+//! -------------- Auth ------------------ */
+
+export const signIn = (formData) => API.post("/user/login", formData)
+
+export const signUp = (formData) => API.post("/user/singup", formData)
+
+export const forgotPassword = (email) => API.post(`/user/forgotPassword`, email)
+
+export const resetPassword = (formData) => API.post(`/user/resetPassword`, formData)
+
+export const logout = (id) => API.get(`/branches/findOne/${id}`)
 
 /* //! ----------- Branch -------------- */
 export const findBranch = (id) => API.get(`/branches/findOne/${id}`)
@@ -76,6 +88,9 @@ export const deleteTeacher = (id) => API.delete(`/teacher/delete/${id}`)
 export const findCourse = (id) => API.get(`/course/findOne/${id}`)
 
 export const findCourses = () => API.get("/course/findAll")
+
+export const getAllFiles = () => API.get("/course/getAllFiles")
+
 
 export const createCourse = (newCourse) => API.post("/course/create", newCourse)
 

@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import { deleteBranch } from "src/store/actions/branch"
 import AddEditBranchDialog from "./AddEditBranchDialog"
 import { IconButton } from "@mui/material"
+import ConfirmDialog from "../../../globalComponents/ConfirmDialog"
 
 function BranchColumns(dispatch) {
   const handleDelete = async (row) => {
@@ -27,9 +28,13 @@ function BranchColumns(dispatch) {
 
       renderCell: (rowData) => (
         <>
-          <IconButton onClick={() => handleDelete(rowData)}>
+           <ConfirmDialog
+            actionFn={() => handleDelete(rowData)}
+            schemeName="branch"
+            action="delete"
+          >
             <DeleteIcon color="error" />
-          </IconButton>
+          </ConfirmDialog>
           <AddEditBranchDialog mode="Edit" />
         </>
       ),
