@@ -28,14 +28,15 @@ function BranchDataGrid() {
   }, [branches])
 
   const submit = async () => {
-
-    dispatch(createBranch({title : branchTitle}))
+    dispatch(createBranch({ title: branchTitle }))
   }
 
   return (
     <>
-      <AddEditBranchDialog mode="Add" />
-        <DataGridComponent rows={rows} columns={columns} />
+      <div style={{ textAlign: "right" }}>
+        <AddEditBranchDialog style={{ textAlign: "left" }} mode="Add" />
+      </div>
+      <DataGridComponent rows={rows} columns={columns} />
     </>
   )
 }

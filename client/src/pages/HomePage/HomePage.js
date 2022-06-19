@@ -2,19 +2,17 @@ import React, { useEffect, useState } from "react"
 import Button from "react-bootstrap/Button"
 import Search from "../../globalComponents/search"
 import StarRating from "../../globalComponents/StarRating.js"
-import Signup from "./homePageComponents/Singup"
-import Login from "./homePageComponents/Login"
+import SingupHomePage from "./homePageComponents/SingupHomePage"
+import Login from "./homePageComponents/LoginHomePage"
 import Teachers from "./homePageComponents/Teachers"
-import Courses from "./homePageComponents/Courses"
+import Courses from "./homePageComponents/HomePageCourses"
 import ContactUs from "./homePageComponents/ContactUs"
-import StudentReview from "./homePageComponents/StudentReview"
+import StudentReview from "./homePageComponents/StudentReviewHomePage"
 import { Link } from "react-router-dom"
-import Header from '../../globalComponents/Header';
-import Footer from '../../globalComponents/Footer';
+import Header from "../../globalComponents/Header"
+import Footer from "../../globalComponents/Footer"
 
 function HomePage() {
-  const [connectedUser, setConnectedUser] = useState("")
-
   return (
     <div>
       <section className="preloader">
@@ -94,9 +92,9 @@ function HomePage() {
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-sm-12">
-              <Login setConnectedUser={setConnectedUser} />
+              <Login />
             </div>
-            <Signup />
+            <SingupHomePage />
           </div>
         </div>
       </section>
@@ -107,7 +105,6 @@ function HomePage() {
       <StudentReview />
 
       <ContactUs />
-
     </div>
   )
 }

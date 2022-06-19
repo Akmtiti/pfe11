@@ -1,8 +1,11 @@
 import User from "../models/user.js"
+import bcrypt from "bcrypt"
 
 export const createStudent = async (req, res) => {
   if ((await User.countDocuments({ email: req.body.email })) > 0)
     return res.status(500).send("Email déjà existante.")
+
+  req.body.password = await bcrypt.hash(req.body.password, 10)
 
   let created = await new User(req.body).save()
 
@@ -28,11 +31,15 @@ export const findAllStudent = async (req, res) => {
 
 export const updateStudent = async (req, res) => {
   const { id } = req.params
-
-  if ((await User.countDocuments({ email: req.body.email })) > 0)
-  return res.status(500).send("Email déjà existante.")
-
   delete req.body._id
+
+  let user = await User.findById(id)
+
+  if (user.email !== req.body.email)
+    if ((await User.countDocuments({ email: req.body.email })) > 0)
+      return res.status(500).send("Email déjà existante.")
+
+  req.body.password = await bcrypt.hash(req.body.password, 10)
 
   let updated = await User.findOneAndUpdate(
     { _id: id },

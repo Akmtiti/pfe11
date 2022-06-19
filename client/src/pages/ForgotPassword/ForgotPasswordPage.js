@@ -1,6 +1,28 @@
 import React, { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { forgotPassword } from "../../api"
 
 function ForgotPasswordPage() {
+  const dispatch = useDispatch()
+  const [formData, setFormData] = useState({})
+  const [feedback, setFeedback] = useState("")
+
+  const handleChange = async (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+  const submit = async (e) => {
+    e.preventDefault()
+
+    try {
+      await forgotPassword({ email: formData.email })
+      setFeedback(
+        "Un email vous a été envoyé pour réinitialiser votre mot de passe."
+      )
+    } catch (error) {
+      setFeedback("Erreur lors de la connection.")
+    }
+  }
+
   return (
     <div>
       <div className="container login-container">
@@ -30,15 +52,18 @@ function ForgotPasswordPage() {
                     className="form-control"
                     name="email"
                     placeholder="Email Address"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="form-group">
                   <button
                     type="button"
                     className="btn btn-primary btn-lg btn-block"
+                    onClick={submit}
                   >
                     Reset Password
                   </button>
+                  {feedback && <p>{feedback}</p>}
                 </div>
                 <div className="form-group other_auth_links">
                   <a className href="/">

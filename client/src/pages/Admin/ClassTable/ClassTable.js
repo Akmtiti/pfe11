@@ -34,7 +34,10 @@ function ClassTable() {
 
   return (
     <>
-      <AddEditClassDialog mode="Add" />
+      < div style={{ textAlign: 'right', }}>
+        
+      <AddEditClassDialog  style={{textAlign: 'left',}} mode="Add" />
+       </div>
       <DataGridComponent
         rows={rows}
         columns={columns}

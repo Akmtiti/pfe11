@@ -31,7 +31,11 @@ function StudentTable() {
 
   return (
     <div>
-      <AddEditStudentDialog mode="Add" />
+      < div style={{ textAlign: 'right', }}>
+        
+      
+      <AddEditStudentDialog  mode="Add" />
+     </div>
       <DataGridComponent rows={rows} columns={columns} onRowEdit={updateStudent} />
     </div>
   )

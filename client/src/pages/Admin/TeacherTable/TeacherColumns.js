@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import { deleteTeacher } from "src/store/actions/teacher"
 import { IconButton } from "@mui/material"
 import AddEditTeacherDialog from "./AddEditTeacherDialog"
+import ConfirmDialog from "../../../globalComponents/ConfirmDialog"
 
 function TeacherColumns(dispatch) {
   const handleDelete = async (row) => {
@@ -31,9 +32,13 @@ function TeacherColumns(dispatch) {
       headerName: "Action",
       renderCell: (rowData) => (
         <>
-          <IconButton onClick={() => handleDelete(rowData)}>
+          <ConfirmDialog
+            actionFn={() => handleDelete(rowData)}
+            schemeName="teacher"
+            action="delete"
+          >
             <DeleteIcon color="error" />
-          </IconButton>
+          </ConfirmDialog>
           <AddEditTeacherDialog mode="Edit" />
         </>
       ),

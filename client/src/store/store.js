@@ -1,5 +1,6 @@
 import { applyMiddleware, configureStore } from "@reduxjs/toolkit"
 import thunk from "redux-thunk"
+import auth from "./reducers/auth"
 import { branch } from "./reducers/branch"
 import { classReducer } from "./reducers/class"
 import { course } from "./reducers/course"
@@ -23,6 +24,7 @@ export const store = configureStore(
       student: student,
       teacher: teacher,
       course: course,
+      auth: auth,
     },
   },
   applyMiddleware(thunk)

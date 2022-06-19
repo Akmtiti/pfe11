@@ -1,5 +1,10 @@
 import User from "../models/user.js"
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import { sendEmail } from "../functions/sendEmail.js"
+
+const secret = process.env.ACCESS_TOKEN_SECRET || "secret"
+
 export const deleteUser = async (req, res) => {
   const { id } = req.params
 
@@ -63,83 +68,6 @@ export const changePassword = async (req, res) => {
   })
 }
 
-export const login = async (req, res) => {
-  console.log(req.body)
-
-  let count = await User.countDocuments({ email: req.body.email })
-
-  if (count === 0) {
-    return res.status(500).send("Compte introuvable.")
-  }
-
-  let result = await User.findOne({
-    email: req.body.email,
-    password: req.body.password,
-  })
-
-  if (result) {
-    res.send(result.username)
-  } else {
-    res.status(500).send("Mot de passe incorrect..")
-  }
-}
-
-export const signUp = async (req, res) => {
-  let count = await User.countDocuments({ email: req.body.email })
-  if (count > 0) return res.status(500).send("Email déjà existante.")
-
-  User.create(req.body, (err, data) => {
-    if (err) {
-      res.status(500).send("Erreur Serveur.")
-    } else {
-      res.status(201).send()
-    }
-  })
-  return
-
-  const getData = async (url) => {
-    return axios.get(url).then((response) => response.data)
-  }
-
-  const registerNewUser = () => {
-    let userData = {
-      username: req.username,
-      email: encryptedEmail,
-      password: encryptedPassword,
-    }
-
-    // Create user
-    User.create(userData, (err, data) => {
-      if (err) {
-        res.status(500).send(err)
-      } else {
-        res.status(201).send(data)
-      }
-    })
-  }
-
-  const encryptedEmail = sha256(req.email)
-  const encryptedPassword = sha256(req.password)
-
-  /* -------------------------- Check same email used ------------------------- */
-  let dbData = await getData("/getUsers")
-
-  // Loop
-  var invalid = false
-  dbData.map((elem) => {
-    if (elem.email == encryptedEmail) {
-      invalid = true
-    }
-  })
-
-  if (invalid) {
-    return res.send("Email already used")
-  }
-
-  /* ------------------------------ Add new user ------------------------------ */
-  registerNewUser()
-}
-
 export const getFields = async (req, res) => {
   const { filter = "{}", fields = "{}" } = req.query
 
@@ -175,6 +103,91 @@ export const addEditUser = async (req, res) => {
   let createdUser = await User.create(req.body)
   res.send(createdUser)
 }
+
+/* #region  Auth */
+export const login = async (req, res) => {
+  let result = await User.findOne({
+    email: req.body.email,
+  })
+
+  if (!result) {
+    return res.status(500).send("Compte introuvable.")
+  }
+
+  if ((await bcrypt.compare(req.body.password, result.password)) === false)
+    res.status(500).send("Mot de passe incorrect..")
+
+  result.password = undefined
+  res.send(result)
+}
+
+// Only for Student
+export const signUp = async (req, res) => {
+  let count = await User.countDocuments({ email: req.body.email })
+
+  if (count > 0) return res.status(500).send("Email déjà existante.")
+
+  await new User({ ...req.body, privilege: "Student" }).save()
+
+  res.send()
+}
+
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body
+  try {
+    const user = await User.findOne({ email })
+    console.log(user)
+    if (!user) return res.status(404).json("L'utilisateur n'existe pas.")
+
+    // Token generation
+    const token = jwt.sign({ email: user.email, id: user._id }, secret, {
+      expiresIn: "24h",
+    })
+
+    // Send Email to user
+    sendEmail({
+      to: user.email,
+      subject: "Récupération de mot de passe",
+      text:
+        "Bonjour,\n\n" +
+          user.name +
+          "\n\nVous avez demandé la récupération de votre mot de passe.\n\n" +
+          "Veuillez cliquer sur le lien suivant pour réinitialiser votre mot de passe:\n\n" +
+          req.hostname ==
+        "localhost"
+          ? "localhost:3000"
+          : "LiveSite" +
+            "/new_password?token=" +
+            token +
+            "\n\nSi vous n'avez pas demandé de réinitialisation de mot de passe, veuillez ignorer ce message.\n\nCordialement,\n\nL'équipe Iber Conseils",
+    })
+    res.send()
+  } catch (error) {
+    res.status(500).send(error)
+  }
+}
+
+// Reset password
+export const resetPassword = async (req, res) => {
+  const { password, token } = req.body
+  try {
+    const decoded = jwt.verify(token, secret)
+    const user = await User.findOne({ email: decoded.email })
+
+
+    if (!user) return res.status(404).send("L'utilisateur n'existe pas")
+    const hashedPassword = await bcrypt.hash(password, 12)
+
+    user.password = hashedPassword
+    await user.save()
+    res.status(200).send("Mot de passe réinitialisé")
+  } catch (error) {
+    res.status(500).send({ message: "Something went wrong" })
+    console.log(error)
+  }
+}
+
+/* #endregion */
 
 function checkValidEmail(x) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(x)

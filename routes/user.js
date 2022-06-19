@@ -1,5 +1,6 @@
 import express from "express"
 const router = express.Router()
+import bcrypt from "bcrypt"
 
 import {
   deleteUser,
@@ -9,25 +10,39 @@ import {
   login,
   getFields,
   addEditUser,
+  forgotPassword,
+  resetPassword,
 } from "../controllers/user.js"
 import userModel from "../models/user.js"
 
-router.put("/user/addEditUser", addEditUser)
+// ;(async () => {
+//   const admin = new userModel({
+//     username: "admin",
+//     password: await bcrypt.hash("admin", 10),
+//     email: "admin@gmail.com",
+//     privilege: "Admin",
+//   })
+//   await admin.save()
+// })()
+
+router.put("/addEditUser", addEditUser)
 
 router.post("/changePassword", changePassword)
 router.post("/modifyUser", modifyUser)
 
-router.get("/user/getFields", getFields)
-router.get("/user/getUsers", async (req, res) =>
+router.get("/getFields", getFields)
+router.get("/getUsers", async (req, res) =>
   res.send(await userModel.find())
 )
-router.get("/user/getTeachers", async (req, res) =>
-  res.send(await userModel.find({privilege : "Teacher"}, "-password"))
+router.get("/getTeachers", async (req, res) =>
+  res.send(await userModel.find({ privilege: "Teacher" }, "-password"))
 )
 
-router.post("/user/singup", signUp)
-router.post("/user/login", login)
+router.post("/singup", signUp)
+router.post("/login", login)
+router.post("/forgotPassword", forgotPassword)
+router.post("/resetPassword", resetPassword)
 
-router.delete("/user/deleteUser/:id", deleteUser)
+router.delete("/deleteUser/:id", deleteUser)
 
 export default router

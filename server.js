@@ -2,7 +2,6 @@
 
 import app from "./config.js"
 
-import recoverPassword from "./controllers/recoverPassword.js"
 import authenticateToken from "./middleware/authenticateToken.js"
 import { deleteToken } from "./controllers/manageAccessToken.js"
 import { verifyToken } from "./controllers/manageAccessToken.js"
@@ -16,8 +15,7 @@ import { branchRoutes } from "./routes/branch.js"
 import { classRoutes } from "./routes/class.js"
 import { studentRoutes } from './routes/student.js';
 
-// Restore password
-recoverPassword(app)
+
 
 // Manage Token
 verifyToken()
@@ -26,7 +24,7 @@ deleteToken()
 // Middleware: Check authorized Access
 // app.use(authenticateToken)
 
-app.use(userRouter)
+app.use("/user",userRouter)
 app.use(reviewRouter)
 app.use(contactUsRouter)
 app.use(customRouter)

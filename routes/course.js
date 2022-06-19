@@ -7,7 +7,7 @@ import {
   findOneCourse,
   findAllCourse,
   updateCourse,
-  deleteOneCourse,
+  deleteOneCourse,deleteUpload, searchFile, fetchAllFiles
 } from "../controllers/course.js"
 
 import multer from "multer"
@@ -18,7 +18,7 @@ export const CourseRoutes = express.Router()
 /* #region  File upload */
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `./courseFiles/${req.params.id}/${req.params.fileCategory}`)
+    cb(null, `./courseFiles/${req.query.id}/${req.query.fileCategory}`)
     req.res.send()
   },
   filename: function (req, file, cb) {
@@ -28,20 +28,16 @@ const storage = multer.diskStorage({
   },
 })
 const fileFilter = async (req, file, cb) => {
-  console.log(file)
-  console.log(req.params.fileCategory)
-  console.log(req.params.id)
   const directories = [
-    `./courseFiles/${req.params.id}`,
-    `./courseFiles/${req.params.id}/${req.params.fileCategory}`,
+    `./courseFiles/${req.query.id}`,
+    `./courseFiles/${req.query.id}/${req.query.fileCategory}`,
   ]
+  
   directories.forEach(async (directory) => {
     if (!fs.existsSync(directory)) {
       fs.mkdirSync(directory)
     }
   })
-
-  // console.log(file)
   cb(null, true)
 }
 
@@ -54,13 +50,19 @@ const upload = multer({
 })
 
 /* #endregion */
-// Get
+
+
 
 CourseRoutes.get("/findOne/:id", findOneCourse)
 CourseRoutes.get("/findAll", findAllCourse)
+CourseRoutes.get("/getAllFiles", fetchAllFiles)
 
 CourseRoutes.post("/create", createCourse)
-CourseRoutes.post("/upload/:id/:fileCategory", upload.array("files", 5))
+CourseRoutes.post("/upload", upload.array("files", 5))
+CourseRoutes.post("/deleteUpload", deleteUpload)
+CourseRoutes.post("/searchFile", searchFile)
+// searchFile()
+
 
 CourseRoutes.patch("/update/:id", updateCourse)
 CourseRoutes.patch("/addFilePath/:id/", addFilePath)
