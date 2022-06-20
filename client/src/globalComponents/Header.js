@@ -92,7 +92,7 @@ function Header() {
                   </a>
                 </li>
                 <li>
-                  <a href="/">
+                  <a href="#login">
                     <i className="smoothScroll"></i> Login
                   </a>
                 </li>
