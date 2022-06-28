@@ -83,12 +83,11 @@ export const getFields = async (req, res) => {
 export const addEditUser = async (req, res) => {
   const { _id, email, password, username } = req.body
 
+  if (password) req.body.password = await bcrypt.hash(password, 10)
+
   // Edit
   if (_id) {
-    let updatedUser = await User.findOneAndUpdate(
-      { _id: _id },
-      { $set: req.body }
-    )
+    let updatedUser = await User.findOneAndUpdate(_id, req.body)
     return res.send(updatedUser)
   }
 
@@ -106,19 +105,19 @@ export const addEditUser = async (req, res) => {
 
 /* #region  Auth */
 export const login = async (req, res) => {
-  let result = await User.findOne({
+  let user = await User.findOne({
     email: req.body.email,
   })
 
-  if (!result) {
+  if (!user) {
     return res.status(500).send("Compte introuvable.")
   }
 
-  if ((await bcrypt.compare(req.body.password, result.password)) === false)
-    res.status(500).send("Mot de passe incorrect..")
+  if ((await bcrypt.compare(req.body.password, user.password)) === false)
+    return res.status(500).send("Mot de passe incorrect..")
 
-  result.password = undefined
-  res.send(result)
+  user.password = ""
+  res.send(user)
 }
 
 // Only for Student
@@ -136,7 +135,6 @@ export const forgotPassword = async (req, res) => {
   const { email } = req.body
   try {
     const user = await User.findOne({ email })
-    console.log(user)
     if (!user) return res.status(404).json("L'utilisateur n'existe pas.")
 
     // Token generation
@@ -144,23 +142,7 @@ export const forgotPassword = async (req, res) => {
       expiresIn: "24h",
     })
 
-    // Send Email to user
-    sendEmail({
-      to: user.email,
-      subject: "Récupération de mot de passe",
-      text:
-        "Bonjour,\n\n" +
-          user.name +
-          "\n\nVous avez demandé la récupération de votre mot de passe.\n\n" +
-          "Veuillez cliquer sur le lien suivant pour réinitialiser votre mot de passe:\n\n" +
-          req.hostname ==
-        "localhost"
-          ? "localhost:3000"
-          : "LiveSite" +
-            "/new_password?token=" +
-            token +
-            "\n\nSi vous n'avez pas demandé de réinitialisation de mot de passe, veuillez ignorer ce message.\n\nCordialement,\n\nL'équipe Iber Conseils",
-    })
+    resetPasswordMail(user, req, token)
     res.send()
   } catch (error) {
     res.status(500).send(error)
@@ -174,7 +156,6 @@ export const resetPassword = async (req, res) => {
     const decoded = jwt.verify(token, secret)
     const user = await User.findOne({ email: decoded.email })
 
-
     if (!user) return res.status(404).send("L'utilisateur n'existe pas")
     const hashedPassword = await bcrypt.hash(password, 12)
 
@@ -187,12 +168,24 @@ export const resetPassword = async (req, res) => {
   }
 }
 
+function resetPasswordMail(user, req, token) {
+  sendEmail({
+    to: user.email,
+    subject: "Récupération de mot de passe",
+    text:
+      "Bonjour,\n\n" +
+      user.username +
+      "\n\nVous avez demandé la récupération de votre mot de passe.\n\n" +
+      "Veuillez cliquer sur le lien suivant pour réinitialiser votre mot de passe:\n\n" +
+      req.headers.origin +
+      "/reset_password?token=" +
+      token +
+      "\n\nSi vous n'avez pas demandé de réinitialisation de mot de passe, veuillez ignorer ce message.",
+  })
+}
+
 /* #endregion */
 
 function checkValidEmail(x) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(x)
 }
-// await User.updateMany(
-//   { privilege: "teacher" },
-//   { $set: { privilege: "Teacher" } }
-// )
