@@ -83,12 +83,11 @@ export const getFields = async (req, res) => {
 export const addEditUser = async (req, res) => {
   const { _id, email, password, username } = req.body
 
+  if (password) req.body.password = await bcrypt.hash(password, 10)
+
   // Edit
   if (_id) {
-    let updatedUser = await User.findOneAndUpdate(
-      { _id: _id },
-      { $set: req.body }
-    )
+    let updatedUser = await User.findOneAndUpdate(_id, req.body)
     return res.send(updatedUser)
   }
 
@@ -106,19 +105,19 @@ export const addEditUser = async (req, res) => {
 
 /* #region  Auth */
 export const login = async (req, res) => {
-  let result = await User.findOne({
+  let user = await User.findOne({
     email: req.body.email,
   })
 
-  if (!result) {
+  if (!user) {
     return res.status(500).send("Compte introuvable.")
   }
 
-  if ((await bcrypt.compare(req.body.password, result.password)) === false)
-    res.status(500).send("Mot de passe incorrect..")
+  if ((await bcrypt.compare(req.body.password, user.password)) === false)
+    return res.status(500).send("Mot de passe incorrect..")
 
-  result.password = undefined
-  res.send(result)
+  user.password = ""
+  res.send(user)
 }
 
 // Only for Student
@@ -181,20 +180,8 @@ function resetPasswordMail(user, req, token) {
       req.headers.origin +
       "/reset_password?token=" +
       token +
-      "\n\nSi vous n'avez pas demandé de réinitialisation de mot de passe, veuillez ignorer ce message",
+      "\n\nSi vous n'avez pas demandé de réinitialisation de mot de passe, veuillez ignorer ce message.",
   })
-  //   text: "Bonjour,\n\n" +
-  //     user.name +
-  //     "\n\nVous avez demandé la récupération de votre mot de passe.\n\n" +
-  //     "Veuillez cliquer sur le lien suivant pour réinitialiser votre mot de passe:\n\n" +
-  //     req.hostname ==
-  //     "localhost"
-  //     ? "localhost:3000"
-  //     : "LiveSite" +
-  //     "/new_password?token=" +
-  //     token +
-  //     "\n\nSi vous n'avez pas demandé de réinitialisation de mot de passe, veuillez ignorer ce message",
-  // })
 }
 
 /* #endregion */
